@@ -17,6 +17,7 @@ app.get('/', (req, res) => {
 })
 
 connectDB()
+
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`)
 })
