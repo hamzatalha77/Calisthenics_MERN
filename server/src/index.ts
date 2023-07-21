@@ -1,8 +1,12 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
+import colors from 'colors'
 import mongoose from 'mongoose'
+import connectDB from '../config/database.ts'
+
 dotenv.config()
+connectDB()
 const port = process.env.PORT
 const app = express()
 
@@ -14,5 +18,7 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`[server]: Server is running at http://localhost:${port}`)
+  console.log(
+    `[server]: Server is running at http://localhost:${port}`.yellow.bold
+  )
 })
