@@ -1,7 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
-import colors from 'colors'
+import chalk from 'chalk' // Import the 'chalk' package here
 import mongoose from 'mongoose'
 import connectDB from '../config/database'
 
@@ -19,6 +19,8 @@ app.get('/', (req, res) => {
 
 app.listen(port, () => {
   console.log(
-    `[server]: Server is running at http://localhost:${port}`.yellow.bold
+    `[server]: Server is running at ${chalk.yellow.bold(
+      `http://localhost:${port}`
+    )}`
   )
 })
