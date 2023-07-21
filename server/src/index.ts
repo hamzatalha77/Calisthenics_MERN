@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import colors from 'colors'
 import mongoose from 'mongoose'
-import connectDB from '../config/database.ts'
+import connectDB from '../config/database'
 
 dotenv.config()
 connectDB()

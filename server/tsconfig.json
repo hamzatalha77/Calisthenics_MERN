@@ -5,7 +5,7 @@
     "lib": ["es6"],
     "allowJs": true,
     "outDir": "build",
-    "rootDir": "src",
+    "rootDir": ".", // Update this line to include the parent directory of 'src'
     "strict": true,
     "noImplicitAny": true,
     "esModuleInterop": true,
