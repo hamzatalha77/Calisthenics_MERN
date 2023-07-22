@@ -15,10 +15,6 @@ app.use(cors())
 
 app.use('/auth', userRouter)
 
-app.get('/', (req, res) => {
-  res.send('Express + TypeScript Server')
-})
-
 connectDB()
 
 app.listen(port, () => {
