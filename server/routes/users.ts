@@ -12,6 +12,6 @@ router.post('/register', async (req, res) => {
 
   res.json(user)
 })
-router.get('/login')
+router.post('/login')
 
 export { router as userRouter }
