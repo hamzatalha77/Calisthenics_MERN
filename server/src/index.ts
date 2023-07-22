@@ -1,7 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
-import mongoose from 'mongoose'
 import connectDB from './config/database'
 import { userRouter } from './routes/users'
 
@@ -14,7 +13,9 @@ app.use(express.json())
 app.use(cors())
 
 app.use('/auth', userRouter)
-
+app.get('/', (req, res) => {
+  res.send('Welcome to the server!')
+})
 connectDB()
 
 app.listen(port, () => {
