@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import connectDB from './config/database'
-import { userRouter } from './routes/users.js'
+import { userRouter } from './routes/users'
 
 dotenv.config()
 
