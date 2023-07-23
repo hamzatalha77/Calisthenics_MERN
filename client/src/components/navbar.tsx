@@ -1,5 +1,12 @@
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
+
 const Navbar = () => {
+  const [isDropdownOpen, setDropdownOpen] = useState(false)
+  const toggleDropdown = () => {
+    setDropdownOpen((prev) => !prev)
+  }
+
   return (
     <div>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -8,10 +15,10 @@ const Navbar = () => {
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
               className="h-8 mr-3"
-              alt="Flowbite Logo"
+              alt="Logo"
             />
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-              Flowbite
+              Calisthenics
             </span>
           </a>
           <div className="flex items-center md:order-2">
@@ -19,20 +26,21 @@ const Navbar = () => {
               type="button"
               className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
               id="user-menu-button"
-              aria-expanded="false"
-              data-dropdown-toggle="user-dropdown"
-              data-dropdown-placement="bottom"
+              aria-expanded={isDropdownOpen ? 'true' : 'false'} // Set aria-expanded based on state
+              onClick={toggleDropdown} // Add onClick event to toggle dropdown
             >
               <span className="sr-only">Open user menu</span>
               <img
                 className="w-8 h-8 rounded-full"
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
-                alt="userphoto"
+                alt="user"
               />
             </button>
 
             <div
-              className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+              className={`z-50 ${
+                isDropdownOpen ? 'block' : 'hidden'
+              } my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
               id="user-dropdown"
             >
               <div className="px-4 py-3">
@@ -119,34 +127,26 @@ const Navbar = () => {
               </li>
               <li>
                 <Link
-                  to="/"
+                  to="/create-exercise"
                   className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
-                  About
+                  Create Exercise
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/"
+                  to="/saved-exercise"
                   className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
-                  Services
+                  Saved Exercise
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/"
+                  to="/auth"
                   className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
-                  Pricing
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/"
-                  className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  Contact
+                  Login/Register
                 </Link>
               </li>
             </ul>
