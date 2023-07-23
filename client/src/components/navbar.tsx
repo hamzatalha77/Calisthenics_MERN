@@ -11,7 +11,7 @@ const Navbar = () => {
     <div>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a href="https://flowbite.com/" className="flex items-center">
+          <Link to="/" className="flex items-center">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
               className="h-8 mr-3"
@@ -20,14 +20,14 @@ const Navbar = () => {
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
               Calisthenics
             </span>
-          </a>
+          </Link>
           <div className="flex items-center md:order-2">
             <button
               type="button"
               className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
               id="user-menu-button"
-              aria-expanded={isDropdownOpen ? 'true' : 'false'} // Set aria-expanded based on state
-              onClick={toggleDropdown} // Add onClick event to toggle dropdown
+              aria-expanded={isDropdownOpen ? 'true' : 'false'}
+              onClick={toggleDropdown}
             >
               <span className="sr-only">Open user menu</span>
               <img
