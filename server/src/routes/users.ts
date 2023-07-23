@@ -19,9 +19,11 @@ router.post('/register', async (req, res) => {
     last_name,
     user_image,
     email,
-    password
+    password: hashedPassword
   })
-  res.json(user)
+  await newUser.save()
+
+  res.json({ message: 'User Registered Successfully !' })
 })
 router.post('/login')
 
