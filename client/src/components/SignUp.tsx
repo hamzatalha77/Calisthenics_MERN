@@ -1,32 +1,35 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState, ChangeEvent } from 'react'
 import { Link } from 'react-router-dom'
+
 const SignUpForm = () => {
-  const [state, setState] = React.useState({
-    name: '',
+  const [formData, setFormData] = useState({
+    first_name: '',
+    last_name: '',
     email: '',
     password: ''
   })
-  const handleChange = (e: any) => {
-    const value = e.target.value
-    setState({
-      ...state,
-      [e.target.name]: value
-    })
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value
+    }))
   }
 
-  const handleOnSubmit = (e: any) => {
+  const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
-    const { name, email, password } = state
-    alert(
-      `You are sign up with name: ${name} email: ${email} and password: ${password}`
-    )
-
-    for (const key in state) {
-      setState({
-        ...state,
-        [key]: ''
+    try {
+      await axios.post('http://localhost:8000/auth/register', {
+        email: formData.email,
+        password: formData.password,
+        first_name: formData.first_name,
+        last_name: formData.last_name
       })
+      alert('Registration Completed! Now Login.')
+    } catch (err) {
+      console.error(err)
     }
   }
 
@@ -47,23 +50,31 @@ const SignUpForm = () => {
         </div>
         <span>or use your email for registration</span>
         <input
-          type="text"
-          name="name"
-          value={state.name}
-          onChange={handleChange}
-          placeholder="Name"
-        />
-        <input
           type="email"
           name="email"
-          value={state.email}
+          value={formData.email}
           onChange={handleChange}
           placeholder="Email"
         />
         <input
+          type="text"
+          name="first_name"
+          value={formData.first_name}
+          onChange={handleChange}
+          placeholder="First Name"
+        />
+        <input
+          type="text"
+          name="last_name"
+          value={formData.last_name}
+          onChange={handleChange}
+          placeholder="Last Name"
+        />
+
+        <input
           type="password"
           name="password"
-          value={state.password}
+          value={formData.password}
           onChange={handleChange}
           placeholder="Password"
         />
