@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 import React, { useState, ChangeEvent } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -78,7 +79,7 @@ const SignUpForm = () => {
           onChange={handleChange}
           placeholder="Password"
         />
-        <button>Sign Up</button>
+        <button type="submit">Sign Up</button>
       </form>
     </div>
   )
