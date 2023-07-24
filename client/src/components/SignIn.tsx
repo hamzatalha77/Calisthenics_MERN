@@ -1,10 +1,15 @@
+import axios from 'axios'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useCookies } from 'react-cookie'
+
 const SignInForm = () => {
   const [state, setState] = React.useState({
     email: '',
     password: ''
   })
+  const [_, setCookies] = useCookies(['access_token'])
+  const navigate = useNavigate()
   const handleChange = (e: any) => {
     const value = e.target.value
     setState({
@@ -13,17 +18,19 @@ const SignInForm = () => {
     })
   }
 
-  const handleOnSubmit = (e: any) => {
+  const handleOnSubmit = async (e: any) => {
     e.preventDefault()
 
-    const { email, password } = state
-    alert(`You are login with email: ${email} and password: ${password}`)
-
-    for (const key in state) {
-      setState({
-        ...state,
-        [key]: ''
+    try {
+      const response = await axios.post('http://localhost:8000/auth/login', {
+        email: state.email,
+        password: state.password
       })
+      setCookies('access_token', response.data.token)
+      window.localStorage.setItem('userID', response.data.userID)
+      navigate('/')
+    } catch (err) {
+      console.error(err)
     }
   }
 

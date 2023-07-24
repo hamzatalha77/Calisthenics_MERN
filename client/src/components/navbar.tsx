@@ -1,12 +1,19 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import { useCookies } from 'react-cookie'
 
 const Navbar = () => {
+  const navigate = useNavigate()
+  const [cookies, setCookies] = useCookies(['access_token'])
   const [isDropdownOpen, setDropdownOpen] = useState(false)
   const toggleDropdown = () => {
     setDropdownOpen((prev) => !prev)
   }
-
+  const logout = () => {
+    setCookies('access_token', '')
+    window.localStorage.removeItem('userID')
+    navigate('/auth')
+  }
   return (
     <div>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -103,9 +110,9 @@ const Navbar = () => {
               >
                 <path
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M1 1h15M1 7h15M1 13h15"
                 />
               </svg>
@@ -141,14 +148,25 @@ const Navbar = () => {
                   Saved Exercise
                 </Link>
               </li>
-              <li>
-                <Link
-                  to="/auth"
-                  className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  Login/Register
-                </Link>
-              </li>
+              {!cookies.access_token ? (
+                <li>
+                  <Link
+                    to="/auth"
+                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >
+                    Login/Register
+                  </Link>
+                </li>
+              ) : (
+                <li>
+                  <button
+                    onClick={logout}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  >
+                    Sign out
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
         </div>
