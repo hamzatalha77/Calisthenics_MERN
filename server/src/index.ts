@@ -19,6 +19,7 @@ app.use('/uploads', express.static('uploads'))
 app.get('/', (req, res) => {
   res.send('Welcome to the server!')
 })
+
 connectDB()
 
 app.listen(port, () => {

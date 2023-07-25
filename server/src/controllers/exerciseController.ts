@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { ExerciseModel } from '../models/Exercises'
 import multer from 'multer'
+import path from 'path'
 
 // Define types explicitly for Multer and NextFunction
 type MulterFile = {
@@ -22,10 +23,9 @@ type MyRequestHandler = (
 
 const storage = multer.diskStorage({
   destination: function (req: Request, file: any, cb: any) {
-    cb(null, 'uploads/') // Set the destination folder where uploaded images will be stored
+    cb(null, path.join(process.cwd(), 'uploads')) // Use absolute path for destination
   },
   filename: function (req: Request, file: any, cb: any) {
-    // Generate a unique filename for each uploaded image
     cb(null, new Date().toISOString() + file.originalname)
   }
 })
@@ -55,21 +55,34 @@ const allExercise = async (req: Request, res: Response): Promise<void> => {
 }
 
 const createExercise = async (req: Request, res: Response): Promise<void> => {
+  console.log('Inside createExercise function')
+
   const exerciseData = req.body
 
-  // Check if req.files exists and contains uploaded files
-  if (req.files && Array.isArray(req.files) && req.files.length > 0) {
-    exerciseData.images = req.files.map((file: MulterFile) => file.path)
-  } else {
-    exerciseData.images = [] // Set an empty array if no images were uploaded
-  }
+  console.log('Exercise data received:', exerciseData)
 
-  const exercise = new ExerciseModel(exerciseData)
   try {
+    // Check if req.files exists and contains uploaded files
+    if (req.files && Array.isArray(req.files) && req.files.length > 0) {
+      exerciseData.images = req.files.map((file: MulterFile) => file.path)
+    } else {
+      exerciseData.images = [] // Set an empty array if no images were uploaded
+    }
+
+    console.log('Exercise data with images:', exerciseData)
+
+    const exercise = new ExerciseModel(exerciseData)
+
+    console.log('Exercise object:', exercise)
+
     const response = await exercise.save()
+
+    console.log('Exercise saved:', response)
+
     res.json(response)
   } catch (err) {
-    res.json(err)
+    console.error('Error creating exercise:', err)
+    res.status(500).json({ error: 'Internal server error' })
   }
 }
 
