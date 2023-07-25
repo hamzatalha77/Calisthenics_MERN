@@ -3,7 +3,6 @@ import { ExerciseModel } from '../models/Exercises'
 import multer from 'multer'
 import path from 'path'
 
-// Define types explicitly for Multer and NextFunction
 type MulterFile = {
   fieldname: string
   originalname: string
@@ -23,14 +22,13 @@ type MyRequestHandler = (
 
 const storage = multer.diskStorage({
   destination: function (req: Request, file: any, cb: any) {
-    cb(null, path.join(process.cwd(), 'uploads')) // Use absolute path for destination
+    cb(null, path.join(process.cwd(), 'uploads'))
   },
   filename: function (req: Request, file: any, cb: any) {
     cb(null, new Date().toISOString() + file.originalname)
   }
 })
 
-// Specify allowed file types using fileFilter option
 const fileFilter = (req: Request, file: any, cb: any) => {
   if (file.mimetype.startsWith('image/')) {
     cb(null, true)
@@ -39,7 +37,6 @@ const fileFilter = (req: Request, file: any, cb: any) => {
   }
 }
 
-// Use MyRequestHandler instead of RequestHandler
 const upload: MyRequestHandler = multer({ storage, fileFilter }).array(
   'images',
   5
@@ -55,34 +52,33 @@ const allExercise = async (req: Request, res: Response): Promise<void> => {
 }
 
 const createExercise = async (req: Request, res: Response): Promise<void> => {
-  console.log('Inside createExercise function')
-
   const exerciseData = req.body
 
-  console.log('Exercise data received:', exerciseData)
-
   try {
-    // Check if req.files exists and contains uploaded files
     if (req.files && Array.isArray(req.files) && req.files.length > 0) {
       exerciseData.images = req.files.map((file: MulterFile) => file.path)
     } else {
-      exerciseData.images = [] // Set an empty array if no images were uploaded
+      exerciseData.images = []
     }
 
-    console.log('Exercise data with images:', exerciseData)
+    console.log('Exercise Data:', exerciseData)
 
     const exercise = new ExerciseModel(exerciseData)
 
-    console.log('Exercise object:', exercise)
-
+    console.log('Saving exercise to the database...')
     const response = await exercise.save()
-
-    console.log('Exercise saved:', response)
+    console.log('Exercise saved successfully:', response)
 
     res.json(response)
-  } catch (err) {
-    console.error('Error creating exercise:', err)
-    res.status(500).json({ error: 'Internal server error' })
+  } catch (err: unknown) {
+    console.error('Error occurred while saving exercise:', err)
+    if (err instanceof Error) {
+      res
+        .status(500)
+        .json({ error: 'Internal server error', message: err.message })
+    } else {
+      res.status(500).json({ error: 'Internal server error' })
+    }
   }
 }
 

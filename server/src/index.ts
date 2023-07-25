@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Request, Response, NextFunction } from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import connectDB from './config/database'
@@ -16,6 +16,12 @@ app.use(cors())
 app.use('/auth', userRouter)
 app.use('/exercise', exerciseRouter)
 app.use('/uploads', express.static('uploads'))
+
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.error('Unhandled Error:', err)
+  res.status(500).json({ error: 'Internal server error' })
+})
+
 app.get('/', (req, res) => {
   res.send('Welcome to the server!')
 })

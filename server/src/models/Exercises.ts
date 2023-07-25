@@ -12,21 +12,21 @@ const exerciseSchema = new mongoose.Schema({
   images: {
     type: [
       {
-        type: String // Assuming you're storing image URLs in the array
+        type: String
       }
     ],
-    default: [] // Set an empty array as the default value
+    default: []
   },
   video: {
-    type: String // Assuming you're storing the video URL as a string
+    type: String
   },
   tags: {
-    type: [String], // An array of strings for tags
-    default: [] // Set an empty array as the default value
+    type: [String],
+    default: []
   },
   muscles: {
-    type: [String], // An array of strings for muscles worked
-    default: [] // Set an empty array as the default value
+    type: [String],
+    default: []
   },
   technique: {
     type: String
@@ -38,7 +38,7 @@ const exerciseSchema = new mongoose.Schema({
     type: Number
   },
   duration: {
-    type: Number // Duration in minutes or seconds, depending on your use case
+    type: Number
   },
   userOwner: {
     type: mongoose.Schema.Types.ObjectId,
