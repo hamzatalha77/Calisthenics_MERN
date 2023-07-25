@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
-const exercisesSchema = new mongoose.Schema({
+const exerciseSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true
@@ -39,9 +39,12 @@ const exercisesSchema = new mongoose.Schema({
   },
   duration: {
     type: Number // Duration in minutes or seconds, depending on your use case
+  },
+  userOwner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'users',
+    required: true
   }
 })
 
-const Exercises = mongoose.model('Exercises', exercisesSchema)
-
-module.exports = Exercises
+export const ExerciseModel = mongoose.model('Exercises', exerciseSchema)
