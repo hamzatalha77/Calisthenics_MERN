@@ -44,7 +44,6 @@ const createExercise = async (req: Request, res: Response): Promise<void> => {
     }
 
     const exercise = new ExerciseModel(exerciseData)
-
     const response = await exercise.save()
     res.json(response)
   } catch (err: unknown) {
@@ -58,5 +57,4 @@ const createExercise = async (req: Request, res: Response): Promise<void> => {
     }
   }
 }
-
 export { allExercise, createExercise }

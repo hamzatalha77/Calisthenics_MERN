@@ -2,12 +2,10 @@ import mongoose from 'mongoose'
 
 const exerciseSchema = new mongoose.Schema({
   title: {
-    type: String,
-    required: true
+    type: String
   },
   description: {
-    type: String,
-    required: true
+    type: String
   },
   images: {
     type: [
@@ -42,8 +40,7 @@ const exerciseSchema = new mongoose.Schema({
   },
   userOwner: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'users',
-    required: true
+    ref: 'users'
   }
 })
 
