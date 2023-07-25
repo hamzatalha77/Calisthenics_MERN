@@ -1,7 +1,12 @@
-import { Request, Response, NextFunction } from 'express'
+import { Request, Response } from 'express'
 import { ExerciseModel } from '../models/Exercises'
-import multer from 'multer'
-import path from 'path'
+import { v2 as cloudinary } from 'cloudinary'
+
+cloudinary.config({
+  cloud_name: 'dodxmvtfr',
+  api_key: '643979424287564',
+  api_secret: '3V_VXb4vQCJdvLRoKJyOKntBT8E'
+})
 
 type MulterFile = {
   fieldname: string
@@ -13,34 +18,6 @@ type MulterFile = {
   path: string
   size: number
 }
-
-type MyRequestHandler = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => void
-
-const storage = multer.diskStorage({
-  destination: function (req: Request, file: any, cb: any) {
-    cb(null, path.join(process.cwd(), 'uploads'))
-  },
-  filename: function (req: Request, file: any, cb: any) {
-    cb(null, new Date().toISOString() + file.originalname)
-  }
-})
-
-const fileFilter = (req: Request, file: any, cb: any) => {
-  if (file.mimetype.startsWith('image/')) {
-    cb(null, true)
-  } else {
-    cb(new Error('Only image files are allowed!'), false)
-  }
-}
-
-const upload: MyRequestHandler = multer({ storage, fileFilter }).array(
-  'images',
-  5
-)
 
 const allExercise = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -56,19 +33,19 @@ const createExercise = async (req: Request, res: Response): Promise<void> => {
 
   try {
     if (req.files && Array.isArray(req.files) && req.files.length > 0) {
-      exerciseData.images = req.files.map((file: MulterFile) => file.path)
+      const imagePromises = req.files.map((file: MulterFile) =>
+        cloudinary.uploader.upload(file.path)
+      )
+      const uploadedImages = await Promise.all(imagePromises)
+
+      exerciseData.images = uploadedImages.map((image: any) => image.secure_url)
     } else {
       exerciseData.images = []
     }
 
-    console.log('Exercise Data:', exerciseData)
-
     const exercise = new ExerciseModel(exerciseData)
 
-    console.log('Saving exercise to the database...')
     const response = await exercise.save()
-    console.log('Exercise saved successfully:', response)
-
     res.json(response)
   } catch (err: unknown) {
     console.error('Error occurred while saving exercise:', err)
@@ -82,4 +59,4 @@ const createExercise = async (req: Request, res: Response): Promise<void> => {
   }
 }
 
-export { allExercise, createExercise, upload }
+export { allExercise, createExercise }

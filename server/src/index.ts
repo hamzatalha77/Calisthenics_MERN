@@ -17,7 +17,7 @@ app.use('/auth', userRouter)
 app.use('/exercise', exerciseRouter)
 app.use('/uploads', express.static('uploads'))
 
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error, req: Request, res: Response) => {
   console.error('Unhandled Error:', err)
   res.status(500).json({ error: 'Internal server error' })
 })
