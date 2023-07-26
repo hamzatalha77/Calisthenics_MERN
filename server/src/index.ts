@@ -4,6 +4,8 @@ import cors from 'cors'
 import connectDB from './config/database'
 import { userRouter } from './routes/users'
 import { exerciseRouter } from './routes/exercises'
+import { uploadRouter } from './routes/upload'
+import path from 'path'
 
 dotenv.config()
 
@@ -15,12 +17,10 @@ app.use(cors())
 
 app.use('/auth', userRouter)
 app.use('/exercise', exerciseRouter)
-app.use('/uploads', express.static('uploads'))
+app.use('/upload', uploadRouter)
 
-app.use((err: Error, req: Request, res: Response) => {
-  console.error('Unhandled Error:', err)
-  res.status(500).json({ error: 'Internal server error' })
-})
+// const __dirname = path.resolve()
+app.use('/uploads', express.static(path.join(__dirname, './uploads')))
 
 app.get('/', (req, res) => {
   res.send('Welcome to the server!')
