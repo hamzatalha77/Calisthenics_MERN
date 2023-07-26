@@ -20,8 +20,23 @@ const checkFileType = (file: any, cb: any) => {
   if (extname && mimetype) {
     return cb(null, true)
   } else {
-    cb('Images only!')
+    cb('Invalid file type. Only JPG, JPEG, and PNG images are allowed.')
   }
 }
 
+const upload = multer({
+  storage
+})
+router.post('/', upload.single('image'), (req, res) => {
+  if (!req.file) {
+    return res.status(400).send({
+      error: 'No image file received.'
+    })
+  }
+
+  res.send({
+    message: 'Image Uploaded',
+    image: `/${req.file.path}`
+  })
+})
 export default router
