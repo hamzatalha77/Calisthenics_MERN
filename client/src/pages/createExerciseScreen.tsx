@@ -1,4 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState, ChangeEvent, FormEvent } from 'react'
+import { Dispatch } from 'redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router'
+import axios from 'axios'
+import { EXERCISE_CREATE_RESET } from '../constants/ExerciseConstants'
+import createExercise from '../actions/exerciseActions'
+
+interface RootState {
+  exerciseCreate: {
+    loading: boolean
+    success: boolean
+    error: boolean
+    // ... other properties
+  }
+}
 
 const CreateExerciseScreen = () => {
   const [title, setTitle] = useState<string>('')
@@ -11,12 +26,65 @@ const CreateExerciseScreen = () => {
   const [sets, setSets] = useState<string>('')
   const [duration, setDuration] = useState<string>('')
   const [images, setImages] = useState<string[]>([])
+  const navigate = useNavigate()
+  const dispatch = useDispatch<Dispatch<any>>()
+
+  const exerciseCreate = useSelector((state: RootState) => state.exerciseCreate)
+
+  const { success: successCreate, error: errorCreate } = exerciseCreate
+
+  useEffect(() => {
+    if (successCreate) {
+      dispatch({ type: EXERCISE_CREATE_RESET })
+      navigate('/saved-exercise')
+    }
+  }, [dispatch, successCreate, errorCreate, navigate])
+
+  const uploadFileHandler = async (e: ChangeEvent<HTMLInputElement>) => {
+    const fileInput = e.target as HTMLInputElement
+    if (fileInput && fileInput.files && fileInput.files.length > 0) {
+      const filesArray: File[] = Array.from(fileInput.files)
+      const formData = new FormData()
+      filesArray.forEach((file, index) => {
+        formData.append('images', file)
+      })
+      console.log(formData)
+      try {
+        const config = {
+          headers: {
+            'Content-Type': 'multiple_files/form-data'
+          }
+        }
+        const { data } = await axios.post('/api/upload', formData, config)
+        setImages(data)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+  }
+  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    dispatch(
+      createExercise({
+        title,
+        description,
+        images,
+        video,
+        tags,
+        muscles,
+        technique,
+        reps,
+        sets,
+        duration
+      })
+    )
+  }
 
   return (
     <div>
       <h1>CreateExercise</h1>
 
-      <form>
+      <form onSubmit={submitHandler}>
         <div className="grid gap-6 mb-6 md:grid-cols-2">
           <div>
             <label
@@ -79,6 +147,7 @@ const CreateExerciseScreen = () => {
               id="multiple_files"
               type="file"
               multiple
+              onChange={uploadFileHandler}
             />
           </div>
           <div>
