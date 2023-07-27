@@ -2,7 +2,7 @@ import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './pages/home'
 import Auth from './pages/auth'
-import CreateExercise from './pages/createExercise'
+import CreateExercise from './pages/createExerciseScreen'
 import SavedExercise from './pages/savedExercise'
 import Navbar from './components/navbar'
 const App = () => {

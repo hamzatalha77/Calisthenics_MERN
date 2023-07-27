@@ -1,6 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const CreateExercise = () => {
+const CreateExerciseScreen = () => {
+  const [title, setTitle] = useState<string>('')
+  const [description, setDescription] = useState<string>('')
+  const [video, setVideo] = useState<string>('')
+  const [muscles, setMuscles] = useState<string>('')
+  const [technique, setTechnique] = useState<string>('')
+  const [tags, setTags] = useState<string>('')
+  const [reps, setReps] = useState<string>('')
+  const [sets, setSets] = useState<string>('')
+  const [duration, setDuration] = useState<string>('')
+  const [images, setImages] = useState<string[]>([])
+
   return (
     <div>
       <h1>CreateExercise</h1>
@@ -19,6 +30,8 @@ const CreateExercise = () => {
               id="title"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Title..."
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
               required
             />
           </div>
@@ -34,10 +47,27 @@ const CreateExercise = () => {
               id="description"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Description..."
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
               required
             />
           </div>
           <div>
+            <div>
+              {/* Display the selected images */}
+              {images.map((imagePath) => (
+                <img
+                  key={imagePath}
+                  src={imagePath}
+                  alt="Uploaded"
+                  style={{
+                    width: '100px',
+                    height: '100px',
+                    objectFit: 'cover'
+                  }}
+                />
+              ))}
+            </div>
             <label
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               htmlFor="multiple_files"
@@ -63,6 +93,8 @@ const CreateExercise = () => {
               id="video"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="video..."
+              value={video}
+              onChange={(e) => setVideo(e.target.value)}
               required
             />
           </div>
@@ -78,6 +110,8 @@ const CreateExercise = () => {
               id="tags"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Tags"
+              value={tags}
+              onChange={(e) => setTags(e.target.value)}
               required
             />
           </div>
@@ -93,6 +127,8 @@ const CreateExercise = () => {
               id="muscles"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="muscles"
+              value={muscles}
+              onChange={(e) => setMuscles(e.target.value)}
               required
             />
           </div>
@@ -108,6 +144,8 @@ const CreateExercise = () => {
               id="technique"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="technique"
+              value={technique}
+              onChange={(e) => setTechnique(e.target.value)}
               required
             />
           </div>
@@ -124,6 +162,8 @@ const CreateExercise = () => {
             id="reps"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="reps"
+            value={reps}
+            onChange={(e) => setReps(e.target.value)}
             required
           />
         </div>
@@ -139,6 +179,8 @@ const CreateExercise = () => {
             id="sets"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="sets"
+            value={sets}
+            onChange={(e) => setSets(e.target.value)}
             required
           />
         </div>
@@ -154,6 +196,8 @@ const CreateExercise = () => {
             id="duration"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="duration"
+            value={duration}
+            onChange={(e) => setDuration(e.target.value)}
             required
           />
         </div>
@@ -169,4 +213,4 @@ const CreateExercise = () => {
   )
 }
 
-export default CreateExercise
+export default CreateExerciseScreen
