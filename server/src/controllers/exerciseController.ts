@@ -12,22 +12,44 @@ const allExercise = async (req: Request, res: Response): Promise<void> => {
 }
 
 const createExercise = asyncHandler(async (req, res) => {
-  const exercise = new ExerciseModel({
-    title: 'Exercise Title',
-    description: 'Exercise Description',
-    images: ['image_url_1', 'image_url_2'],
-    video: 'video_url_here',
-    tags: ['tag1', 'tag2'],
-    muscles: ['muscle1', 'muscle2'],
-    technique: 'Exercise Technique',
-    reps: 0,
-    sets: 0,
-    duration: 0,
-    userOwner: 'user_id_here'
-  })
-  const createExercise = await exercise.save()
-  res.status(201).json(createExercise)
+  try {
+    const exercise = new ExerciseModel({
+      title: req.body.title,
+      description: req.body.description,
+      images: req.body.images,
+      video: req.body.video,
+      tags: req.body.tags,
+      muscles: req.body.muscles,
+      technique: req.body.technique,
+      reps: req.body.reps,
+      sets: req.body.sets,
+      duration: req.body.duration,
+      userOwner: req.body.userOwner
+    })
+    console.log(req.body.images)
+    const createExercise = await exercise.save()
+    res.status(201).json(createExercise)
+  } catch (error: any) {
+    res.status(400).json({ message: error.message })
+  }
 })
+// const createExercise = asyncHandler(async (req, res) => {
+//   const exercise = new ExerciseModel({
+//     title: 'Exercise Title',
+//     description: 'Exercise Description',
+//     images: ['image_url_1', 'image_url_2'],
+//     video: 'video_url_here',
+//     tags: ['tag1', 'tag2'],
+//     muscles: ['muscle1', 'muscle2'],
+//     technique: 'Exercise Technique',
+//     reps: 0,
+//     sets: 0,
+//     duration: 0,
+//     userOwner: 'user_id_here'
+//   })
+//   const createExercise = await exercise.save()
+//   res.status(201).json(createExercise)
+// })
 
 const updateExercise = asyncHandler(async (req, res) => {
   const {
