@@ -3,7 +3,7 @@ import express from 'express'
 import multer from 'multer'
 import { Request, Response } from 'express'
 import { ExerciseModel } from '../models/Exercises'
-import mongoose from 'mongoose'
+
 const router = express.Router()
 
 const storage = multer.diskStorage({
