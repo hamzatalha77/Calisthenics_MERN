@@ -1,8 +1,7 @@
-import React, { useEffect, useState, ChangeEvent, FormEvent } from 'react'
+import { useEffect, useState, ChangeEvent, FormEvent } from 'react'
 import { Dispatch } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
-import axios from 'axios'
 import { EXERCISE_CREATE_RESET } from '../constants/ExerciseConstants'
 import createExercise from '../actions/exerciseActions'
 
@@ -11,7 +10,6 @@ interface RootState {
     loading: boolean
     success: boolean
     error: boolean
-    // ... other properties
   }
 }
 
@@ -25,7 +23,7 @@ const CreateExerciseScreen = () => {
   const [reps, setReps] = useState<string>('')
   const [sets, setSets] = useState<string>('')
   const [duration, setDuration] = useState<string>('')
-  const [images, setImages] = useState<string[]>([])
+  const [images] = useState<string[]>([])
   const [imagesToUpload, setImagesToUpload] = useState<File[]>()
   const navigate = useNavigate()
   const dispatch = useDispatch<Dispatch<any>>()
