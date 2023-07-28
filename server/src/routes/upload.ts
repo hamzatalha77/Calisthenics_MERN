@@ -52,18 +52,21 @@ const upload = multer({
   }
 }).array('images[]', 5)
 
-router.post('/', upload, (req: Request, res: Response) => {
+router.post('/', upload, async (req: Request, res: Response) => {
   const fileArray = req.files as Express.Multer.File[]
   if (fileArray) {
-    const fileUrls = fileArray.map((file: Express.Multer.File) =>
-      `${req.protocol}://${req.get('host')}/${file.path}`.replace('[]', '')
+    const fileUrls = fileArray.map(
+      (file: Express.Multer.File) =>
+        `${req.protocol}://${req.get('host')}/${file.path
+          .replace(/\\/g, '/')
+          .replace('[]', '')}`
     )
     const data = {
       ...req.body,
       images: fileUrls
     } as any
     const exercises = new ExerciseModel(data)
-    exercises.save()
+    await exercises.save()
     res.json(exercises)
   } else {
     res.status(400).json({ error: 'No files were uploaded.' })
