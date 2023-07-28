@@ -20,7 +20,7 @@ app.use('/api/exercises', exerciseRouter)
 app.use('/api/upload', uploadRouter)
 
 // const __dirname = path.resolve()
-app.use('/uploads', express.static(path.join(__dirname, './uploads')))
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 app.get('/', (req, res) => {
   res.send('Welcome to the server!')
