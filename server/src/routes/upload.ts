@@ -2,6 +2,8 @@ import path from 'path'
 import express from 'express'
 import multer from 'multer'
 import { Request, Response } from 'express'
+import { ExerciseModel } from '../models/Exercises'
+import mongoose from 'mongoose'
 const router = express.Router()
 
 const storage = multer.diskStorage({
@@ -44,23 +46,25 @@ const upload = multer({
   fileFilter: function (
     req: Request,
     file: Express.Multer.File,
-    cb: (error: Error | null, acceptFile: boolean) => void
+    cb: (error: any, acceptFile: boolean) => void
   ) {
     checkFileType(file, cb)
   }
-}).array('images', 5) // Allow up to 5 images to be uploaded
+}).array('images[]', 5)
 
 router.post('/', upload, (req: Request, res: Response) => {
-  console.log('req.body:', req.body)
-
-  // Use type assertion to tell TypeScript the type of req.files
   const fileArray = req.files as Express.Multer.File[]
   if (fileArray) {
-    const fileUrls = fileArray.map(
-      (file: Express.Multer.File) =>
-        `${req.protocol}://${req.get('host')}/${file.path}`
+    const fileUrls = fileArray.map((file: Express.Multer.File) =>
+      `${req.protocol}://${req.get('host')}/${file.path}`.replace('[]', '')
     )
-    res.json(fileUrls)
+    const data = {
+      ...req.body,
+      images: fileUrls
+    } as any
+    const exercises = new ExerciseModel(data)
+    exercises.save()
+    res.json(exercises)
   } else {
     res.status(400).json({ error: 'No files were uploaded.' })
   }

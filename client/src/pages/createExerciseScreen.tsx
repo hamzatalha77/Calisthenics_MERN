@@ -26,6 +26,7 @@ const CreateExerciseScreen = () => {
   const [sets, setSets] = useState<string>('')
   const [duration, setDuration] = useState<string>('')
   const [images, setImages] = useState<string[]>([])
+  const [imagesToUpload, setImagesToUpload] = useState<File[]>()
   const navigate = useNavigate()
   const dispatch = useDispatch<Dispatch<any>>()
 
@@ -42,24 +43,14 @@ const CreateExerciseScreen = () => {
 
   const uploadFileHandler = async (e: ChangeEvent<HTMLInputElement>) => {
     const fileInput = e.target as HTMLInputElement
+    console.log(e.target.files)
     if (fileInput && fileInput.files && fileInput.files.length > 0) {
       const filesArray: File[] = Array.from(fileInput.files)
-      const formData = new FormData()
+      const _images: File[] = []
       filesArray.forEach((file, index) => {
-        formData.append('images', file)
+        _images.push(file)
       })
-      console.log(formData)
-      try {
-        const config = {
-          headers: {
-            'Content-Type': 'multiple_files/form-data'
-          }
-        }
-        const { data } = await axios.post('/api/upload', formData, config)
-        setImages(data)
-      } catch (error) {
-        console.error(error)
-      }
+      setImagesToUpload(_images)
     }
   }
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
@@ -68,7 +59,7 @@ const CreateExerciseScreen = () => {
       createExercise({
         title,
         description,
-        images,
+        images: imagesToUpload,
         video,
         tags,
         muscles,
@@ -100,7 +91,6 @@ const CreateExerciseScreen = () => {
               placeholder="Title..."
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              required
             />
           </div>
           <div>
@@ -117,7 +107,6 @@ const CreateExerciseScreen = () => {
               placeholder="Description..."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              required
             />
           </div>
           <div>
@@ -164,7 +153,6 @@ const CreateExerciseScreen = () => {
               placeholder="video..."
               value={video}
               onChange={(e) => setVideo(e.target.value)}
-              required
             />
           </div>
           <div>
@@ -181,7 +169,6 @@ const CreateExerciseScreen = () => {
               placeholder="Tags"
               value={tags}
               onChange={(e) => setTags(e.target.value)}
-              required
             />
           </div>
           <div>
@@ -198,7 +185,6 @@ const CreateExerciseScreen = () => {
               placeholder="muscles"
               value={muscles}
               onChange={(e) => setMuscles(e.target.value)}
-              required
             />
           </div>
           <div>
@@ -215,7 +201,6 @@ const CreateExerciseScreen = () => {
               placeholder="technique"
               value={technique}
               onChange={(e) => setTechnique(e.target.value)}
-              required
             />
           </div>
         </div>
@@ -233,7 +218,6 @@ const CreateExerciseScreen = () => {
             placeholder="reps"
             value={reps}
             onChange={(e) => setReps(e.target.value)}
-            required
           />
         </div>
         <div className="mb-6">
@@ -250,7 +234,6 @@ const CreateExerciseScreen = () => {
             placeholder="sets"
             value={sets}
             onChange={(e) => setSets(e.target.value)}
-            required
           />
         </div>
         <div className="mb-6">
@@ -267,7 +250,6 @@ const CreateExerciseScreen = () => {
             placeholder="duration"
             value={duration}
             onChange={(e) => setDuration(e.target.value)}
-            required
           />
         </div>
 

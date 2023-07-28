@@ -9,7 +9,11 @@ import {
 const createExercise = (exercise: any) => async (dispatch: Dispatch) => {
   try {
     dispatch({ type: EXERCISE_CREATE_REQUEST })
-    const { data } = await axios.post(`/api/exercises`, exercise)
+    const { data } = await axios.post(`/api/upload`, exercise, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
     dispatch({ type: EXERCISE_CREATE_SUCCESS, payload: data })
   } catch (error: any) {
     console.error(error)
