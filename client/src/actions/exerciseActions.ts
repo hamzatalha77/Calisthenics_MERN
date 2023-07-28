@@ -3,8 +3,28 @@ import { Dispatch } from 'redux'
 import {
   EXERCISE_CREATE_REQUEST,
   EXERCISE_CREATE_SUCCESS,
-  EXERCISE_CREATE_FAIL
+  EXERCISE_CREATE_FAIL,
+  EXERCISE_LIST_REQUEST,
+  EXERCISE_LIST_SUCCESS,
+  EXERCISE_LIST_FAIL
 } from '../constants/ExerciseConstants'
+
+const listExercise = async (dispatch: Dispatch) => {
+  try {
+    dispatch({ type: EXERCISE_LIST_REQUEST })
+    const { data } = await axios.get(`/api/exercises`)
+    dispatch({ type: EXERCISE_LIST_SUCCESS, payload: data })
+  } catch (error: any) {
+    console.error(error)
+    dispatch({
+      type: EXERCISE_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    })
+  }
+}
 
 const createExercise = (exercise: any) => async (dispatch: Dispatch) => {
   try {
@@ -26,4 +46,4 @@ const createExercise = (exercise: any) => async (dispatch: Dispatch) => {
     })
   }
 }
-export default createExercise
+export { createExercise, listExercise }

@@ -2,13 +2,32 @@ import {
   EXERCISE_CREATE_FAIL,
   EXERCISE_CREATE_REQUEST,
   EXERCISE_CREATE_RESET,
-  EXERCISE_CREATE_SUCCESS
+  EXERCISE_CREATE_SUCCESS,
+  EXERCISE_LIST_FAIL,
+  EXERCISE_LIST_REQUEST,
+  EXERCISE_LIST_SUCCESS
 } from '../constants/ExerciseConstants'
 
 interface ExerciseAction {
   type: string
   payload?: any
 }
+const exerciseListReducers = (
+  state = { exercises: [] },
+  action: ExerciseAction
+) => {
+  switch (action.type) {
+    case EXERCISE_LIST_REQUEST:
+      return { loading: true, exercises: [] }
+    case EXERCISE_LIST_SUCCESS:
+      return { loading: false, exercises: action.payload.exercises }
+    case EXERCISE_LIST_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
 const exerciseCreateReducers = (state = {}, action: ExerciseAction) => {
   switch (action.type) {
     case EXERCISE_CREATE_REQUEST:
@@ -23,4 +42,4 @@ const exerciseCreateReducers = (state = {}, action: ExerciseAction) => {
       return state
   }
 }
-export default exerciseCreateReducers
+export { exerciseCreateReducers, exerciseListReducers }
