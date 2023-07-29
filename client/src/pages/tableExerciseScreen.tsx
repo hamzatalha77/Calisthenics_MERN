@@ -1,6 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../types/index'
+import { listExercises } from '../actions/exerciseActions'
 
 const TableExercise = () => {
+  const dispatch = useDispatch()
+  const exerciseList = useSelector((state: RootState) => state.exerciseList)
+  const { loading, error, exercises } = exerciseList
+
   return (
     <div>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -8,16 +15,16 @@ const TableExercise = () => {
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
-                Product name
+                Exercise Title
               </th>
               <th scope="col" className="px-6 py-3">
-                Color
+                Description
               </th>
               <th scope="col" className="px-6 py-3">
-                Category
+                Duration
               </th>
               <th scope="col" className="px-6 py-3">
-                Price
+                Technique
               </th>
               <th scope="col" className="px-6 py-3">
                 Edit
@@ -28,33 +35,38 @@ const TableExercise = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+            {exercises.map((exercise) => (
+              <tr
+                className="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
+                key={exercise._id}
               >
-                Apple MacBook Pro 17"
-              </th>
-              <td className="px-6 py-4">Silver</td>
-              <td className="px-6 py-4">Laptop</td>
-              <td className="px-6 py-4">$2999</td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-green-600 dark:text-green-500 hover:underline"
+                <th
+                  scope="row"
+                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  Edit
-                </a>
-              </td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-red-600 dark:text-red-500 hover:underline"
-                >
-                  Delete
-                </a>
-              </td>
-            </tr>
+                  {exercise.title}
+                </th>
+                <td className="px-6 py-4">Silver</td>
+                <td className="px-6 py-4">Laptop</td>
+                <td className="px-6 py-4">$2999</td>
+                <td className="px-6 py-4">
+                  <a
+                    href="#"
+                    className="font-medium text-green-600 dark:text-green-500 hover:underline"
+                  >
+                    Edit
+                  </a>
+                </td>
+                <td className="px-6 py-4">
+                  <a
+                    href="#"
+                    className="font-medium text-red-600 dark:text-red-500 hover:underline"
+                  >
+                    Delete
+                  </a>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

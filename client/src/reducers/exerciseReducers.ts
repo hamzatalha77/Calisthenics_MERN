@@ -13,16 +13,20 @@ interface ExerciseAction {
   payload?: any
 }
 const exerciseListReducers = (
-  state = { exercises: [] },
+  state = { loading: false, exercises: [], error: null },
   action: ExerciseAction
 ) => {
   switch (action.type) {
     case EXERCISE_LIST_REQUEST:
-      return { loading: true, exercises: [] }
+      return { loading: true, exercises: [], error: null }
     case EXERCISE_LIST_SUCCESS:
-      return { loading: false, exercises: action.payload.exercises }
+      return {
+        loading: false,
+        exercises: action.payload.exercises,
+        error: null
+      }
     case EXERCISE_LIST_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, exercises: [], error: action.payload }
     default:
       return state
   }

@@ -9,11 +9,12 @@ import {
   EXERCISE_LIST_FAIL
 } from '../constants/ExerciseConstants'
 
-const listExercise = async (dispatch: Dispatch) => {
+const listExercises = () => async (dispatch: Dispatch) => {
   try {
     dispatch({ type: EXERCISE_LIST_REQUEST })
-    const { data } = await axios.get(`/api/exercises`)
+    const { data } = await axios.get('/api/exercises')
     dispatch({ type: EXERCISE_LIST_SUCCESS, payload: data })
+    console.log(data)
   } catch (error: any) {
     console.error(error)
     dispatch({
@@ -46,4 +47,4 @@ const createExercise = (exercise: any) => async (dispatch: Dispatch) => {
     })
   }
 }
-export { createExercise, listExercise }
+export { createExercise, listExercises }
