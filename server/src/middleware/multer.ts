@@ -1,10 +1,6 @@
 import path from 'path'
-import express from 'express'
 import multer from 'multer'
-import { Request, Response } from 'express'
-import { ExerciseModel } from '../models/Exercises'
-
-const router = express.Router()
+import { Request } from 'express'
 
 const storage = multer.diskStorage({
   destination(
@@ -52,25 +48,4 @@ const upload = multer({
   }
 }).array('images[]', 5)
 
-router.post('/', upload, async (req: Request, res: Response) => {
-  const fileArray = req.files as Express.Multer.File[]
-  if (fileArray) {
-    const fileUrls = fileArray.map(
-      (file: Express.Multer.File) =>
-        `${req.protocol}://${req.get('host')}/${file.path
-          .replace('[]', '')
-          .replace(/\\/g, '/')}`
-    )
-    const data = {
-      ...req.body,
-      images: fileUrls
-    } as any
-    const exercises = new ExerciseModel(data)
-    await exercises.save()
-    res.json(exercises)
-  } else {
-    res.status(400).json({ error: 'No files were uploaded.' })
-  }
-})
-
-export { router as uploadRouter }
+export default upload

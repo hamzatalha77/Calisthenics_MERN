@@ -1,5 +1,5 @@
 import thunk from 'redux-thunk'
-import exerciseCreateReducers from './reducers/exerciseReducers'
+import { exerciseCreateReducers } from './reducers/exerciseReducers'
 import { combineReducers, applyMiddleware, createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
