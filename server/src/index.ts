@@ -4,7 +4,7 @@ import cors from 'cors'
 import connectDB from './config/database'
 import { userRouter } from './routes/users'
 import { exerciseRouter } from './routes/exercises'
-import { uploadRouter } from './routes/upload'
+import { uploadRouter } from './routes/uploadRoute'
 import path from 'path'
 import { imagesRouter } from './routes/images'
 
