@@ -6,3 +6,7 @@ export const EXERCISE_CREATE_REQUEST = 'EXERCISE_CREATE_REQUEST'
 export const EXERCISE_CREATE_SUCCESS = 'EXERCISE_CREATE_SUCCESS'
 export const EXERCISE_CREATE_FAIL = 'EXERCISE_CREATE_FAIL'
 export const EXERCISE_CREATE_RESET = 'EXERCISE_CREATE_RESET'
+export interface ExerciseAction {
+  type: string
+  payload?: any
+}

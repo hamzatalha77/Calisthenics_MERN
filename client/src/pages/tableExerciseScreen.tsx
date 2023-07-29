@@ -8,6 +8,11 @@ const TableExercise = () => {
   const exerciseList = useSelector((state: RootState) => state.exerciseList)
   const { loading, error, exercises } = exerciseList
 
+  useEffect(() => {
+    dispatch(listExercises() as any) // Trigger the action to fetch exercises
+  }, [dispatch])
+
+  console.log('exercises:', exercises)
   return (
     <div>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
