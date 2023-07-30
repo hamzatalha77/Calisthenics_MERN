@@ -7,7 +7,10 @@ import {
   EXERCISE_LIST_REQUEST,
   EXERCISE_LIST_SUCCESS,
   EXERCISE_LIST_FAIL,
-  ExerciseAction
+  ExerciseAction,
+  EXERCISE_UPDATE_REQUEST,
+  EXERCISE_UPDATE_SUCCESS,
+  EXERCISE_UPDATE_FAIL
 } from '../constants/ExerciseConstants'
 
 const listExercises =
@@ -36,11 +39,14 @@ const createExercise =
   (exercise: any) => async (dispatch: (action: ExerciseAction) => void) => {
     try {
       dispatch({ type: EXERCISE_CREATE_REQUEST })
-      const { data } = await axios.post(`/api/upload`, exercise, {
+
+      const config = {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
-      })
+      }
+      const { data } = await axios.post(`/api/upload`, exercise, config)
+
       dispatch({ type: EXERCISE_CREATE_SUCCESS, payload: data })
     } catch (error: any) {
       console.error(error)
@@ -53,4 +59,33 @@ const createExercise =
       })
     }
   }
-export { createExercise, listExercises }
+const updateExercise =
+  (exercise: any) => async (dispatch: (action: ExerciseAction) => void) => {
+    try {
+      dispatch({ type: EXERCISE_UPDATE_REQUEST })
+
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+
+      const { data } = await axios.put(
+        `/api/upload/${exercise._id}`,
+        exercise,
+        config
+      )
+
+      dispatch({ type: EXERCISE_UPDATE_SUCCESS, payload: data })
+    } catch (error: any) {
+      console.error(error)
+      dispatch({
+        type: EXERCISE_UPDATE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+      })
+    }
+  }
+export { createExercise, listExercises, updateExercise }

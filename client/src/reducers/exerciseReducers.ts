@@ -1,4 +1,10 @@
 import {
+  EXERCISE_UPDATE_FAIL,
+  EXERCISE_UPDATE_REQUEST,
+  EXERCISE_UPDATE_RESET,
+  EXERCISE_UPDATE_SUCCESS
+} from '../constants/ExerciseConstants'
+import {
   EXERCISE_CREATE_FAIL,
   EXERCISE_CREATE_REQUEST,
   EXERCISE_CREATE_RESET,
@@ -46,4 +52,21 @@ const exerciseCreateReducers = (state = {}, action: ExerciseAction) => {
       return state
   }
 }
-export { exerciseCreateReducers, exerciseListReducers }
+const exerciseUpdateReducers = (
+  state = { exercise: {} },
+  action: ExerciseAction
+) => {
+  switch (action.type) {
+    case EXERCISE_UPDATE_REQUEST:
+      return { loading: true }
+    case EXERCISE_UPDATE_SUCCESS:
+      return { loading: false, success: true, exercise: action.payload }
+    case EXERCISE_UPDATE_FAIL:
+      return { loading: false, error: action.payload }
+    case EXERCISE_UPDATE_RESET:
+      return {}
+    default:
+      return state
+  }
+}
+export { exerciseCreateReducers, exerciseListReducers, exerciseUpdateReducers }
