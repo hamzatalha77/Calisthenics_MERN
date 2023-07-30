@@ -14,8 +14,11 @@ const listExercises =
   () => async (dispatch: (action: ExerciseAction) => void) => {
     try {
       dispatch({ type: EXERCISE_LIST_REQUEST })
+
       const { data } = await axios.get('/api/exercises')
+
       dispatch({ type: EXERCISE_LIST_SUCCESS, payload: data })
+
       console.log(data)
     } catch (error: any) {
       console.error(error)
