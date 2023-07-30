@@ -1,6 +1,7 @@
 import thunk from 'redux-thunk'
 import {
   exerciseCreateReducers,
+  exerciseDetailsReducers,
   exerciseListReducers,
   exerciseUpdateReducers
 } from './reducers/exerciseReducers'
@@ -10,7 +11,8 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 const reducer = combineReducers({
   exerciseCreate: exerciseCreateReducers,
   exerciseList: exerciseListReducers,
-  exerciseUpdate: exerciseUpdateReducers
+  exerciseUpdate: exerciseUpdateReducers,
+  exerciseDetails: exerciseDetailsReducers
 })
 const initialState = {}
 

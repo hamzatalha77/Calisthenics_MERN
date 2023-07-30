@@ -2,14 +2,15 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../types/index'
 import { listExercises } from '../actions/exerciseActions'
+import { Dispatch } from 'redux'
 
 const TableExercise = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<Dispatch<any>>()
   const exerciseList = useSelector((state: RootState) => state.exerciseList)
   const { loading, error, exercises } = exerciseList
 
   useEffect(() => {
-    dispatch(listExercises() as any) // Trigger the action to fetch exercises
+    dispatch(listExercises())
   }, [dispatch])
 
   console.log('exercises:', exercises)

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { EXERCISE_DETAILS_FAIL } from '../constants/ExerciseConstants'
 
 import {
   EXERCISE_CREATE_REQUEST,
@@ -10,7 +11,9 @@ import {
   ExerciseAction,
   EXERCISE_UPDATE_REQUEST,
   EXERCISE_UPDATE_SUCCESS,
-  EXERCISE_UPDATE_FAIL
+  EXERCISE_UPDATE_FAIL,
+  EXERCISE_DETAILS_REQUEST,
+  EXERCISE_DETAILS_SUCCESS
 } from '../constants/ExerciseConstants'
 
 const listExercises =
@@ -27,6 +30,27 @@ const listExercises =
       console.error(error)
       dispatch({
         type: EXERCISE_LIST_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+      })
+    }
+  }
+const listExercisesDetails =
+  (id: any) => async (dispatch: (action: ExerciseAction) => void) => {
+    try {
+      dispatch({ type: EXERCISE_DETAILS_REQUEST })
+
+      const { data } = await axios.get(`/api/exercises/${id}`)
+
+      dispatch({ type: EXERCISE_DETAILS_SUCCESS, payload: data })
+
+      console.log(data)
+    } catch (error: any) {
+      console.error(error)
+      dispatch({
+        type: EXERCISE_DETAILS_FAIL,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message
@@ -88,4 +112,4 @@ const updateExercise =
       })
     }
   }
-export { createExercise, listExercises, updateExercise }
+export { createExercise, listExercises, updateExercise, listExercisesDetails }

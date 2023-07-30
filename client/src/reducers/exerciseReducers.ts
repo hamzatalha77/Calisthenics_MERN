@@ -1,4 +1,7 @@
 import {
+  EXERCISE_DETAILS_FAIL,
+  EXERCISE_DETAILS_REQUEST,
+  EXERCISE_DETAILS_SUCCESS,
   EXERCISE_UPDATE_FAIL,
   EXERCISE_UPDATE_REQUEST,
   EXERCISE_UPDATE_RESET,
@@ -37,6 +40,24 @@ const exerciseListReducers = (
       return state
   }
 }
+const exerciseDetailsReducers = (
+  state = { exercise: {} },
+  action: ExerciseAction
+) => {
+  switch (action.type) {
+    case EXERCISE_DETAILS_REQUEST:
+      return { ...state, loading: true }
+    case EXERCISE_DETAILS_SUCCESS:
+      return {
+        loading: false,
+        exercise: action.payload
+      }
+    case EXERCISE_DETAILS_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
 
 const exerciseCreateReducers = (state = {}, action: ExerciseAction) => {
   switch (action.type) {
@@ -69,4 +90,9 @@ const exerciseUpdateReducers = (
       return state
   }
 }
-export { exerciseCreateReducers, exerciseListReducers, exerciseUpdateReducers }
+export {
+  exerciseCreateReducers,
+  exerciseListReducers,
+  exerciseUpdateReducers,
+  exerciseDetailsReducers
+}
