@@ -39,18 +39,36 @@ const CreateExerciseScreen = () => {
     }
   }, [dispatch, successCreate, errorCreate, navigate])
 
+  // const uploadFileHandler = async (e: ChangeEvent<HTMLInputElement>) => {
+  //   const fileInput = e.target as HTMLInputElement
+  //   console.log(e.target.files)
+  //   if (fileInput && fileInput.files && fileInput.files.length > 0) {
+  //     const filesArray: File[] = Array.from(fileInput.files)
+  //     const _images: File[] = []
+
+  //     filesArray.forEach((file, index) => {
+  //       _images.push(file)
+  //     })
+  //     setImagesToUpload(_images)
+  //   }
+  // }
+
   const uploadFileHandler = async (e: ChangeEvent<HTMLInputElement>) => {
     const fileInput = e.target as HTMLInputElement
     console.log(e.target.files)
     if (fileInput && fileInput.files && fileInput.files.length > 0) {
       const filesArray: File[] = Array.from(fileInput.files)
-      const _images: File[] = []
+      const _images: string[] = []
+
       filesArray.forEach((file, index) => {
-        _images.push(file)
+        _images.push(URL.createObjectURL(file)) // Convert File to Blob URL
+        console.log(file.name)
       })
-      setImagesToUpload(_images)
+      setImages(_images) // Update the images state with the selected image paths
+      setImagesToUpload(filesArray) // Store the selected images in the state
     }
   }
+
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     dispatch(
@@ -108,7 +126,7 @@ const CreateExerciseScreen = () => {
             />
           </div>
           <div>
-            <div>
+            <div className="theimage">
               {/* Display the selected images */}
               {images.map((imagePath) => (
                 <img

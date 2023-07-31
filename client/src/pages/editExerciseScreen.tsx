@@ -12,7 +12,8 @@ interface RootState {
     error: boolean
   }
 }
-const EditExercise = () => {
+const EditExercise = ({ match, history }: any) => {
+  const exerciseId = match.params.id
   const [title, setTitle] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [video, setVideo] = useState<string>('')
@@ -26,6 +27,7 @@ const EditExercise = () => {
   const [imagesToUpload, setImagesToUpload] = useState<File[]>()
   const navigate = useNavigate()
   const dispatch = useDispatch<Dispatch<any>>()
+
   return <div></div>
 }
 
