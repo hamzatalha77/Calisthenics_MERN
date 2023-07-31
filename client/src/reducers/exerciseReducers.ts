@@ -5,7 +5,8 @@ import {
   EXERCISE_UPDATE_FAIL,
   EXERCISE_UPDATE_REQUEST,
   EXERCISE_UPDATE_RESET,
-  EXERCISE_UPDATE_SUCCESS
+  EXERCISE_UPDATE_SUCCESS,
+  ExerciseAction
 } from '../constants/ExerciseConstants'
 import {
   EXERCISE_CREATE_FAIL,
@@ -16,29 +17,7 @@ import {
   EXERCISE_LIST_REQUEST,
   EXERCISE_LIST_SUCCESS
 } from '../constants/ExerciseConstants'
-
-interface ExerciseAction {
-  type: string
-  payload?: any
-}
-interface Exercise {
-  _id: string
-  title: string
-}
-
-interface ExerciseListState {
-  loading: boolean
-  success: boolean
-  error: boolean
-  exercises: Exercise[]
-}
-
-const initialState: ExerciseListState = {
-  loading: false,
-  success: false,
-  error: false,
-  exercises: []
-}
+import { initialState } from '../types'
 
 const exerciseListReducers = (state = initialState, action: ExerciseAction) => {
   switch (action.type) {

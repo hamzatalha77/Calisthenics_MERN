@@ -1,16 +1,24 @@
-type Exercise = {
+interface ExerciseAction {
+  type: string
+  payload?: any
+}
+interface Exercise {
   _id: string
   title: string
-  description?: string
-  images: string[]
-  video?: string
-  tags: string[]
-  muscles: string[]
-  technique?: string
-  reps?: number
-  sets?: number
-  duration?: number
-  userOwner: string
+}
+
+interface ExerciseListState {
+  loading: boolean
+  success: boolean
+  error: boolean
+  exercises: Exercise[]
+}
+
+export const initialState: ExerciseListState = {
+  loading: false,
+  success: false,
+  error: false,
+  exercises: []
 }
 export interface RootState {
   exerciseList: {
