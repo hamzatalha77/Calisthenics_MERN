@@ -21,27 +21,45 @@ interface ExerciseAction {
   type: string
   payload?: any
 }
-const exerciseListReducers = (
-  state = { loading: false, exercises: [], error: null },
-  action: ExerciseAction
-) => {
+interface Exercise {
+  _id: string
+  title: string
+}
+
+interface ExerciseListState {
+  loading: boolean
+  success: boolean
+  error: boolean
+  exercises: Exercise[]
+}
+
+const initialState: ExerciseListState = {
+  loading: false,
+  success: false,
+  error: false,
+  exercises: []
+}
+
+const exerciseListReducers = (state = initialState, action: ExerciseAction) => {
   switch (action.type) {
     case EXERCISE_LIST_REQUEST:
-      return { loading: true, exercises: [], error: null }
+      return { ...state, loading: true, exercises: [], error: false }
     case EXERCISE_LIST_SUCCESS:
       return {
+        ...state,
         loading: false,
-        exercises: action.payload.exercises,
-        error: null
+        success: true,
+        exercises: action.payload, // The payload should directly contain the exercises array
+        error: false
       }
     case EXERCISE_LIST_FAIL:
-      return { loading: false, exercises: [], error: action.payload }
+      return { ...state, loading: false, exercises: [], error: true }
     default:
       return state
   }
 }
 const exerciseDetailsReducers = (
-  state = { exercise: {} },
+  state = { loading: false, success: false, error: false, exercise: {} },
   action: ExerciseAction
 ) => {
   switch (action.type) {

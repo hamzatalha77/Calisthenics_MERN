@@ -1,19 +1,27 @@
 import React, { useEffect, useState, ChangeEvent, FormEvent } from 'react'
 import { Dispatch } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router'
+import { useNavigate, useParams } from 'react-router-dom'
 import { EXERCISE_CREATE_RESET } from '../constants/ExerciseConstants'
-import { updateExercise } from '../actions/exerciseActions'
+import {
+  updateExercise,
+  listExercisesDetails
+} from '../actions/exerciseActions'
+interface Exercise {
+  title: string
+  // other properties of the exercise object...
+}
 
 interface RootState {
-  exerciseCreate: {
+  exerciseDetails: {
     loading: boolean
     success: boolean
     error: boolean
+    exercise: Exercise
   }
 }
 const EditExercise = ({ match, history }: any) => {
-  const exerciseId = match.params.id
+  const { id } = useParams<{ id: string }>()
   const [title, setTitle] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [video, setVideo] = useState<string>('')
@@ -28,7 +36,24 @@ const EditExercise = ({ match, history }: any) => {
   const navigate = useNavigate()
   const dispatch = useDispatch<Dispatch<any>>()
 
-  return <div></div>
+  const exerciseDetails = useSelector(
+    (state: RootState) => state.exerciseDetails
+  )
+  const { loading, error, exercise } = exerciseDetails
+
+  useEffect(() => {
+    dispatch(listExercisesDetails(id))
+  }, [dispatch, id])
+
+  return (
+    <div>
+      <h1>Edit Exercise</h1>
+      <div>
+        {loading ? 'Loading...' : error ? 'Error occurred.' : exercise.title}
+      </div>
+      {/* ... other input fields and form logic ... */}
+    </div>
+  )
 }
 
 export default EditExercise

@@ -10,6 +10,15 @@ const allExercise = async (req: Request, res: Response): Promise<void> => {
     res.json(err)
   }
 }
+const getExerciseById = asyncHandler(async (req, res) => {
+  const exercise = await ExerciseModel.findById(req.params.id)
+  if (exercise) {
+    res.json(exercise)
+  } else {
+    res.status(404)
+    throw new Error('Exercise Not Found')
+  }
+})
 
 const createExercise = asyncHandler(async (req, res) => {
   try {
@@ -87,4 +96,4 @@ const updateExercise = asyncHandler(async (req, res) => {
   }
 })
 
-export { allExercise, createExercise, updateExercise }
+export { allExercise, createExercise, updateExercise, getExerciseById }

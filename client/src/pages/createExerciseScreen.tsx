@@ -61,11 +61,11 @@ const CreateExerciseScreen = () => {
       const _images: string[] = []
 
       filesArray.forEach((file, index) => {
-        _images.push(URL.createObjectURL(file)) // Convert File to Blob URL
+        _images.push(URL.createObjectURL(file))
         console.log(file.name)
       })
-      setImages(_images) // Update the images state with the selected image paths
-      setImagesToUpload(filesArray) // Store the selected images in the state
+      setImages(_images)
+      setImagesToUpload(filesArray)
     }
   }
 

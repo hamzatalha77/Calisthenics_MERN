@@ -41,10 +41,10 @@ const TableExercise = () => {
             </tr>
           </thead>
           <tbody>
-            {exercises.map((exercise) => (
+            {exercises?.map((exercise) => (
               <tr
                 className="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
-                key={exercise._id}
+                key={exercise._id} // Add unique key to each table row
               >
                 <th
                   scope="row"
