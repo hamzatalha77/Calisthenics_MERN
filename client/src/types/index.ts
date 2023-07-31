@@ -6,6 +6,7 @@ export interface ExerciseAction {
 export interface Exercise {
   _id: string
   title: string
+  images?: string[]
 }
 
 export interface ExerciseListState {
@@ -39,6 +40,13 @@ export interface RootStateExerciseDetails {
 }
 export interface RootStateExerciseCreate {
   exerciseCreate: {
+    loading: boolean
+    success: boolean
+    error: boolean
+  }
+}
+export interface RootStateExerciseUpdate {
+  exerciseUpdate: {
     loading: boolean
     success: boolean
     error: boolean

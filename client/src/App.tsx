@@ -17,7 +17,7 @@ const App = () => {
           <Route path="/create-exercise" element={<CreateExercise />} />
           <Route path="/saved-exercise" element={<SavedExercise />} />
           <Route path="/table-exercise" element={<TableExercise />} />
-          <Route path="/edit-exercise/:id/edit" element={<EditExercise />} />
+          <Route path="/edit-exercise/:exerciseId" element={<EditExercise />} />
         </Routes>
       </Router>
     </div>

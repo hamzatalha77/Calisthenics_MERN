@@ -1,6 +1,4 @@
 import axios from 'axios'
-import { EXERCISE_DETAILS_FAIL } from '../constants/ExerciseConstants'
-
 import {
   EXERCISE_CREATE_REQUEST,
   EXERCISE_CREATE_SUCCESS,
@@ -12,7 +10,8 @@ import {
   EXERCISE_UPDATE_SUCCESS,
   EXERCISE_UPDATE_FAIL,
   EXERCISE_DETAILS_REQUEST,
-  EXERCISE_DETAILS_SUCCESS
+  EXERCISE_DETAILS_SUCCESS,
+  EXERCISE_DETAILS_FAIL
 } from '../constants/ExerciseConstants'
 import { ExerciseAction } from '../types'
 
