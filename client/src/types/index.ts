@@ -1,26 +1,27 @@
-interface ExerciseAction {
+export interface ExerciseAction {
   type: string
   payload?: any
 }
-interface Exercise {
+
+export interface Exercise {
   _id: string
   title: string
 }
 
-interface ExerciseListState {
+export interface ExerciseListState {
   loading: boolean
   success: boolean
   error: boolean
   exercises: Exercise[]
 }
 
-export const initialState: ExerciseListState = {
+const initialState: ExerciseListState = {
   loading: false,
   success: false,
   error: false,
   exercises: []
 }
-export interface RootState {
+export interface RootStateExerciseList {
   exerciseList: {
     loading: boolean
     success: boolean
@@ -28,3 +29,19 @@ export interface RootState {
     exercises: Exercise[]
   }
 }
+export interface RootStateExerciseDetails {
+  exerciseDetails: {
+    loading: boolean
+    success: boolean
+    error: boolean
+    exercise: Exercise
+  }
+}
+export interface RootStateExerciseCreate {
+  exerciseCreate: {
+    loading: boolean
+    success: boolean
+    error: boolean
+  }
+}
+export { initialState }

@@ -15,8 +15,3 @@ export const EXERCISE_UPDATE_REQUEST = 'EXERCISE_UPDATE_REQUEST'
 export const EXERCISE_UPDATE_SUCCESS = 'EXERCISE_UPDATE_SUCCESS'
 export const EXERCISE_UPDATE_FAIL = 'EXERCISE_UPDATE_FAIL'
 export const EXERCISE_UPDATE_RESET = 'EXERCISE_UPDATE_RESET'
-
-export interface ExerciseAction {
-  type: string
-  payload?: any
-}

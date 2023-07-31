@@ -4,14 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { EXERCISE_CREATE_RESET } from '../constants/ExerciseConstants'
 import { createExercise } from '../actions/exerciseActions'
-
-interface RootState {
-  exerciseCreate: {
-    loading: boolean
-    success: boolean
-    error: boolean
-  }
-}
+import { RootStateExerciseCreate } from '../types'
 
 const CreateExerciseScreen = () => {
   const [title, setTitle] = useState<string>('')
@@ -28,7 +21,9 @@ const CreateExerciseScreen = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch<Dispatch<any>>()
 
-  const exerciseCreate = useSelector((state: RootState) => state.exerciseCreate)
+  const exerciseCreate = useSelector(
+    (state: RootStateExerciseCreate) => state.exerciseCreate
+  )
 
   const { success: successCreate, error: errorCreate } = exerciseCreate
 

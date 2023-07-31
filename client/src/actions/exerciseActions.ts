@@ -8,13 +8,13 @@ import {
   EXERCISE_LIST_REQUEST,
   EXERCISE_LIST_SUCCESS,
   EXERCISE_LIST_FAIL,
-  ExerciseAction,
   EXERCISE_UPDATE_REQUEST,
   EXERCISE_UPDATE_SUCCESS,
   EXERCISE_UPDATE_FAIL,
   EXERCISE_DETAILS_REQUEST,
   EXERCISE_DETAILS_SUCCESS
 } from '../constants/ExerciseConstants'
+import { ExerciseAction } from '../types'
 
 const listExercises =
   () => async (dispatch: (action: ExerciseAction) => void) => {

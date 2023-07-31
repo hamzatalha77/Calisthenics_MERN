@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../types/index'
+import { RootStateExerciseList } from '../types/index'
 import { listExercises } from '../actions/exerciseActions'
 import { Dispatch } from 'redux'
 
 const TableExercise = () => {
   const dispatch = useDispatch<Dispatch<any>>()
-  const exerciseList = useSelector((state: RootState) => state.exerciseList)
+  const exerciseList = useSelector(
+    (state: RootStateExerciseList) => state.exerciseList
+  )
   const { loading, error, exercises } = exerciseList
 
   useEffect(() => {

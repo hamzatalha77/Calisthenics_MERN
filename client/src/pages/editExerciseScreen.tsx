@@ -7,19 +7,8 @@ import {
   updateExercise,
   listExercisesDetails
 } from '../actions/exerciseActions'
-interface Exercise {
-  title: string
-  // other properties of the exercise object...
-}
+import { RootStateExerciseDetails } from '../types'
 
-interface RootState {
-  exerciseDetails: {
-    loading: boolean
-    success: boolean
-    error: boolean
-    exercise: Exercise
-  }
-}
 const EditExercise = ({ match, history }: any) => {
   const { id } = useParams<{ id: string }>()
   const [title, setTitle] = useState<string>('')
@@ -37,7 +26,7 @@ const EditExercise = ({ match, history }: any) => {
   const dispatch = useDispatch<Dispatch<any>>()
 
   const exerciseDetails = useSelector(
-    (state: RootState) => state.exerciseDetails
+    (state: RootStateExerciseDetails) => state.exerciseDetails
   )
   const { loading, error, exercise } = exerciseDetails
 
