@@ -53,12 +53,36 @@ const EditExercise = ({ match, history }: any) => {
     }
   }, [dispatch, exerciseId, successUpdate, exercise, history])
 
+  const uploadFileHandler = async (e: ChangeEvent<HTMLInputElement>) => {
+    const fileInput = e.target as HTMLInputElement
+    console.log(e.target.files)
+    if (fileInput && fileInput.files && fileInput.files.length > 0) {
+      const filesArray: File[] = Array.from(fileInput.files)
+      const _images: string[] = []
+
+      filesArray.forEach((file, index) => {
+        _images.push(URL.createObjectURL(file))
+        console.log(file.name)
+      })
+      setImages(_images)
+      setImagesToUpload(filesArray)
+    }
+  }
+  const removeImage = (index: number) => {
+    const updatedImages = [...images]
+    updatedImages.splice(index, 1)
+    setImages(updatedImages)
+    // If the imagesToUpload state is used, you should also remove the corresponding file from the imagesToUpload array.
+    // For example, if you update the state like this:
+    // setImagesToUpload((prevImages) => prevImages?.filter((_, i) => i !== index));
+  }
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     dispatch(
       updateExercise({
         _id: exerciseId,
-        title
+        title,
+        images: imagesToUpload
       })
     )
   }
@@ -71,6 +95,49 @@ const EditExercise = ({ match, history }: any) => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
+        <div>
+          <div className="theimage">
+            {/* Display the selected images */}
+            {images.map((imagePath, index) => (
+              <div key={index}>
+                <img
+                  key={imagePath}
+                  src={imagePath}
+                  alt="Uploaded"
+                  style={{
+                    width: '100px',
+                    height: '100px',
+                    objectFit: 'cover'
+                  }}
+                />
+                <button
+                  className="remove-button"
+                  onClick={() => removeImage(index)}
+                >
+                  X
+                </button>
+              </div>
+            ))}
+          </div>
+          <label
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            htmlFor="multiple_files"
+          >
+            Upload multiple files
+          </label>
+          {/* <input
+            type="text"
+            value={images}
+            onChange={(e) => setImages(e.target.value)}
+          /> */}
+          <input
+            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+            id="multiple_files"
+            type="file"
+            multiple
+            onChange={uploadFileHandler}
+          />
+        </div>
         <button type="submit">Update</button>
       </form>
     </div>
