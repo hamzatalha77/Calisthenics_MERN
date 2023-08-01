@@ -72,9 +72,14 @@ const EditExercise = ({ match, history }: any) => {
     const updatedImages = [...images]
     updatedImages.splice(index, 1)
     setImages(updatedImages)
-    // If the imagesToUpload state is used, you should also remove the corresponding file from the imagesToUpload array.
-    // For example, if you update the state like this:
-    // setImagesToUpload((prevImages) => prevImages?.filter((_, i) => i !== index));
+
+    // Reset the file input value to clear the selection
+    const fileInput = document.getElementById(
+      'multiple_files'
+    ) as HTMLInputElement
+    if (fileInput) {
+      fileInput.value = ''
+    }
   }
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -85,6 +90,8 @@ const EditExercise = ({ match, history }: any) => {
         images: imagesToUpload
       })
     )
+    setImagesToUpload(undefined)
+    setImages([])
   }
   return (
     <div>
@@ -111,6 +118,7 @@ const EditExercise = ({ match, history }: any) => {
                   }}
                 />
                 <button
+                  type="button"
                   className="remove-button"
                   onClick={() => removeImage(index)}
                 >
