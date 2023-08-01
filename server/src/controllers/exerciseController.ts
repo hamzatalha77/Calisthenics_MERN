@@ -96,4 +96,20 @@ const updateExercise = asyncHandler(async (req, res) => {
   }
 })
 
-export { allExercise, createExercise, updateExercise, getExerciseById }
+const deleteExercise = asyncHandler(async (req: Request, res: Response) => {
+  const exercise = await ExerciseModel.findByIdAndDelete(req.params.id)
+  if (exercise) {
+    res.json({ message: 'Exercise Removed' })
+  } else {
+    res.status(404)
+    throw new Error('Exercise not found')
+  }
+})
+
+export {
+  allExercise,
+  createExercise,
+  updateExercise,
+  getExerciseById,
+  deleteExercise
+}
