@@ -1,4 +1,7 @@
 import {
+  EXERCISE_DELETE_FAIL,
+  EXERCISE_DELETE_REQUEST,
+  EXERCISE_DELETE_SUCCESS,
   EXERCISE_DETAILS_FAIL,
   EXERCISE_DETAILS_REQUEST,
   EXERCISE_DETAILS_SUCCESS,
@@ -86,9 +89,22 @@ const exerciseUpdateReducers = (
       return state
   }
 }
+const exerciseDeleteReducers = (state = {}, action: ExerciseAction) => {
+  switch (action.type) {
+    case EXERCISE_DELETE_REQUEST:
+      return { loading: true }
+    case EXERCISE_DELETE_SUCCESS:
+      return { loading: false, success: true }
+    case EXERCISE_DELETE_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
 export {
   exerciseCreateReducers,
   exerciseListReducers,
   exerciseUpdateReducers,
-  exerciseDetailsReducers
+  exerciseDetailsReducers,
+  exerciseDeleteReducers
 }

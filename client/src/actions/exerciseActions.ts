@@ -11,7 +11,10 @@ import {
   EXERCISE_UPDATE_FAIL,
   EXERCISE_DETAILS_REQUEST,
   EXERCISE_DETAILS_SUCCESS,
-  EXERCISE_DETAILS_FAIL
+  EXERCISE_DETAILS_FAIL,
+  EXERCISE_DELETE_REQUEST,
+  EXERCISE_DELETE_SUCCESS,
+  EXERCISE_DELETE_FAIL
 } from '../constants/ExerciseConstants'
 import { ExerciseAction } from '../types'
 
@@ -111,4 +114,29 @@ const updateExercise =
       })
     }
   }
-export { createExercise, listExercises, updateExercise, listExercisesDetails }
+
+const deleteExercise =
+  (exercise: any) => async (dispatch: (action: ExerciseAction) => void) => {
+    try {
+      dispatch({ type: EXERCISE_DELETE_REQUEST })
+      await axios.delete(`/api/exercises/${exercise._id}`)
+      dispatch({ type: EXERCISE_DELETE_SUCCESS })
+    } catch (error: any) {
+      console.error(error)
+      dispatch({
+        type: EXERCISE_DELETE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+      })
+    }
+  }
+
+export {
+  createExercise,
+  listExercises,
+  updateExercise,
+  listExercisesDetails,
+  deleteExercise
+}
