@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootStateExerciseList } from '../types/index'
 import { listExercises } from '../actions/exerciseActions'
 import { Dispatch } from 'redux'
+import { Link } from 'react-router-dom'
 
 const TableExercise = () => {
   const dispatch = useDispatch<Dispatch<any>>()
@@ -58,12 +59,12 @@ const TableExercise = () => {
                 <td className="px-6 py-4">Laptop</td>
                 <td className="px-6 py-4">$2999</td>
                 <td className="px-6 py-4">
-                  <a
-                    href="#"
+                  <Link
+                    to={`/edit-exercise/${exercise._id}`}
                     className="font-medium text-green-600 dark:text-green-500 hover:underline"
                   >
                     Edit
-                  </a>
+                  </Link>
                 </td>
                 <td className="px-6 py-4">
                   <a

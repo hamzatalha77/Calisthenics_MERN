@@ -43,7 +43,7 @@ const EditExercise = ({ match, history }: any) => {
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: EXERCISE_UPDATE_RESET })
-      history.push('/table-exercise')
+      navigate('/table-exercise')
     } else {
       if (!exercise.title || exercise._id !== exerciseId) {
         dispatch(listExercisesDetails(exerciseId))
