@@ -1,6 +1,7 @@
 import thunk from 'redux-thunk'
 import {
   exerciseCreateReducers,
+  exerciseDeleteReducers,
   exerciseDetailsReducers,
   exerciseListReducers,
   exerciseUpdateReducers
@@ -12,7 +13,8 @@ const reducer = combineReducers({
   exerciseCreate: exerciseCreateReducers,
   exerciseList: exerciseListReducers,
   exerciseUpdate: exerciseUpdateReducers,
-  exerciseDetails: exerciseDetailsReducers
+  exerciseDetails: exerciseDetailsReducers,
+  exerciseDelete: exerciseDeleteReducers
 })
 const initialState = {}
 
