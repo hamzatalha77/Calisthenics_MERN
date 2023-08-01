@@ -1,4 +1,10 @@
-import React, { useEffect, useState, ChangeEvent, FormEvent } from 'react'
+import React, {
+  useEffect,
+  useState,
+  ChangeEvent,
+  FormEvent,
+  useRef
+} from 'react'
 import { Dispatch } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
@@ -20,7 +26,7 @@ const CreateExerciseScreen = () => {
   const [imagesToUpload, setImagesToUpload] = useState<File[]>()
   const navigate = useNavigate()
   const dispatch = useDispatch<Dispatch<any>>()
-
+  const fileInputRef = useRef<HTMLInputElement>(null)
   const exerciseCreate = useSelector(
     (state: RootStateExerciseCreate) => state.exerciseCreate
   )
@@ -61,6 +67,22 @@ const CreateExerciseScreen = () => {
       })
       setImages(_images)
       setImagesToUpload(filesArray)
+    }
+  }
+
+  const deleteImage = (index: number) => {
+    const updatedImages = [...images]
+    updatedImages.splice(index, 1)
+    setImages(updatedImages)
+
+    // Also update the imagesToUpload state to reflect the current selection after deletion
+    const updatedImagesToUpload = imagesToUpload ? [...imagesToUpload] : []
+    updatedImagesToUpload.splice(index, 1)
+    setImagesToUpload(updatedImagesToUpload)
+
+    // Reset the file input value to clear the selected files
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''
     }
   }
 
@@ -122,18 +144,27 @@ const CreateExerciseScreen = () => {
           </div>
           <div>
             <div className="theimage">
-              {/* Display the selected images */}
-              {images.map((imagePath) => (
-                <img
-                  key={imagePath}
-                  src={imagePath}
-                  alt="Uploaded"
-                  style={{
-                    width: '100px',
-                    height: '100px',
-                    objectFit: 'cover'
-                  }}
-                />
+              {images.map((imagePath, index) => (
+                <div key={index} className="image-preview">
+                  {/* Display the selected images */}
+
+                  <img
+                    src={imagePath}
+                    alt="Uploaded"
+                    style={{
+                      width: '100px',
+                      height: '100px',
+                      objectFit: 'cover'
+                    }}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => deleteImage(index)}
+                    className="delete-button"
+                  >
+                    Delete
+                  </button>
+                </div>
               ))}
             </div>
             <label

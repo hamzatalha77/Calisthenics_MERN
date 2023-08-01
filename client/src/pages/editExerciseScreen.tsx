@@ -1,4 +1,10 @@
-import React, { useEffect, useState, ChangeEvent, FormEvent } from 'react'
+import React, {
+  useEffect,
+  useState,
+  ChangeEvent,
+  FormEvent,
+  useRef
+} from 'react'
 import { Dispatch } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -22,6 +28,7 @@ const EditExercise = ({ match, history }: any) => {
   const [duration, setDuration] = useState<string>('')
   const [images, setImages] = useState<string[]>([])
   const [imagesToUpload, setImagesToUpload] = useState<File[]>()
+  const fileInputRef = useRef<HTMLInputElement>(null)
   const navigate = useNavigate()
   const dispatch = useDispatch<Dispatch<any>>()
 
@@ -68,26 +75,29 @@ const EditExercise = ({ match, history }: any) => {
       setImagesToUpload(filesArray)
     }
   }
-  const removeImage = (index: number) => {
+  const deleteImage = (index: number) => {
     const updatedImages = [...images]
     updatedImages.splice(index, 1)
     setImages(updatedImages)
 
-    // Reset the file input value to clear the selection
-    const fileInput = document.getElementById(
-      'multiple_files'
-    ) as HTMLInputElement
-    if (fileInput) {
-      fileInput.value = ''
+    // Also update the imagesToUpload state to reflect the current selection after deletion
+    const updatedImagesToUpload = imagesToUpload ? [...imagesToUpload] : []
+    updatedImagesToUpload.splice(index, 1)
+    setImagesToUpload(updatedImagesToUpload)
+
+    // Reset the file input value to clear the selected files
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''
     }
   }
+
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     dispatch(
       updateExercise({
         _id: exerciseId,
         title,
-        images: imagesToUpload
+        images: imagesToUpload // Use the updated imagesToUpload state
       })
     )
     setImagesToUpload(undefined)
@@ -108,7 +118,6 @@ const EditExercise = ({ match, history }: any) => {
             {images.map((imagePath, index) => (
               <div key={index}>
                 <img
-                  key={imagePath}
                   src={imagePath}
                   alt="Uploaded"
                   style={{
@@ -119,10 +128,10 @@ const EditExercise = ({ match, history }: any) => {
                 />
                 <button
                   type="button"
-                  className="remove-button"
-                  onClick={() => removeImage(index)}
+                  onClick={() => deleteImage(index)}
+                  className="delete-button"
                 >
-                  X
+                  Delete
                 </button>
               </div>
             ))}
