@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  useState,
-  ChangeEvent,
-  FormEvent,
-  useRef
-} from 'react'
+import { useEffect, useState, ChangeEvent, FormEvent, useRef } from 'react'
 import { Dispatch } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
@@ -75,12 +69,10 @@ const CreateExerciseScreen = () => {
     updatedImages.splice(index, 1)
     setImages(updatedImages)
 
-    // Also update the imagesToUpload state to reflect the current selection after deletion
     const updatedImagesToUpload = imagesToUpload ? [...imagesToUpload] : []
     updatedImagesToUpload.splice(index, 1)
     setImagesToUpload(updatedImagesToUpload)
 
-    // Reset the file input value to clear the selected files
     if (fileInputRef.current) {
       fileInputRef.current.value = ''
     }
@@ -146,8 +138,6 @@ const CreateExerciseScreen = () => {
             <div className="theimage">
               {images.map((imagePath, index) => (
                 <div key={index} className="image-preview">
-                  {/* Display the selected images */}
-
                   <img
                     src={imagePath}
                     alt="Uploaded"

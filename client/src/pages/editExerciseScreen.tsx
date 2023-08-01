@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  useState,
-  ChangeEvent,
-  FormEvent,
-  useRef
-} from 'react'
+import { useEffect, useState, ChangeEvent, FormEvent, useRef } from 'react'
 import { Dispatch } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -80,12 +74,10 @@ const EditExercise = ({ match, history }: any) => {
     updatedImages.splice(index, 1)
     setImages(updatedImages)
 
-    // Also update the imagesToUpload state to reflect the current selection after deletion
     const updatedImagesToUpload = imagesToUpload ? [...imagesToUpload] : []
     updatedImagesToUpload.splice(index, 1)
     setImagesToUpload(updatedImagesToUpload)
 
-    // Reset the file input value to clear the selected files
     if (fileInputRef.current) {
       fileInputRef.current.value = ''
     }
@@ -97,7 +89,7 @@ const EditExercise = ({ match, history }: any) => {
       updateExercise({
         _id: exerciseId,
         title,
-        images: imagesToUpload // Use the updated imagesToUpload state
+        images: imagesToUpload
       })
     )
     setImagesToUpload(undefined)
@@ -114,7 +106,6 @@ const EditExercise = ({ match, history }: any) => {
         />
         <div>
           <div className="theimage">
-            {/* Display the selected images */}
             {images.map((imagePath, index) => (
               <div key={index}>
                 <img
@@ -142,11 +133,6 @@ const EditExercise = ({ match, history }: any) => {
           >
             Upload multiple files
           </label>
-          {/* <input
-            type="text"
-            value={images}
-            onChange={(e) => setImages(e.target.value)}
-          /> */}
           <input
             className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
             id="multiple_files"
