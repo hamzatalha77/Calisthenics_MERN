@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootStateExerciseList } from '../types/index'
-import { listExercises } from '../actions/exerciseActions'
+import { RootStateExerciseDelete, RootStateExerciseList } from '../types/index'
+import { deleteExercise, listExercises } from '../actions/exerciseActions'
 import { Dispatch } from 'redux'
 import { Link } from 'react-router-dom'
 
@@ -12,6 +12,19 @@ const TableExercise = () => {
   )
   const { loading, error, exercises } = exerciseList
 
+  const exerciseDelete = useSelector(
+    (state: RootStateExerciseDelete) => state.exerciseDelete
+  )
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete
+  } = exerciseDelete
+  const deleteHandler = (id: string) => {
+    if (window.confirm('Are you sure')) {
+      dispatch(deleteExercise(id))
+    }
+  }
   useEffect(() => {
     dispatch(listExercises())
   }, [dispatch])
@@ -67,12 +80,12 @@ const TableExercise = () => {
                   </Link>
                 </td>
                 <td className="px-6 py-4">
-                  <a
-                    href="#"
+                  <button
+                    onClick={() => deleteHandler(exercise._id)}
                     className="font-medium text-red-600 dark:text-red-500 hover:underline"
                   >
                     Delete
-                  </a>
+                  </button>
                 </td>
               </tr>
             ))}

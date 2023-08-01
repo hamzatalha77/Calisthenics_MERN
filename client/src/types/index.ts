@@ -30,6 +30,14 @@ export interface RootStateExerciseList {
     exercises: Exercise[]
   }
 }
+export interface RootStateExerciseDelete {
+  exerciseDelete: {
+    loading: boolean
+    success: boolean
+    error: boolean
+    exercises: Exercise[]
+  }
+}
 export interface RootStateExerciseDetails {
   exerciseDetails: {
     loading: boolean
