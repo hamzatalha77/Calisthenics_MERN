@@ -20,9 +20,13 @@ const TableExercise = () => {
     error: errorDelete,
     success: successDelete
   } = exerciseDelete
-  const deleteHandler = (exerciseId: string) => {
-    // Call the deleteExercise action with the exerciseId
-    dispatch(deleteExercise(exerciseId))
+  const deleteHandler = async (exerciseId: string) => {
+    try {
+      await dispatch(deleteExercise(exerciseId))
+      dispatch(listExercises())
+    } catch (error) {
+      console.error('Error deleting exercise:', error)
+    }
   }
   useEffect(() => {
     dispatch(listExercises())
