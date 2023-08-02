@@ -116,10 +116,10 @@ const updateExercise =
   }
 
 const deleteExercise =
-  (exercise: any) => async (dispatch: (action: ExerciseAction) => void) => {
+  (exerciseId: any) => async (dispatch: (action: ExerciseAction) => void) => {
     try {
       dispatch({ type: EXERCISE_DELETE_REQUEST })
-      await axios.delete(`/api/exercises/${exercise._id}`)
+      await axios.delete(`/api/exercises/${exerciseId}`)
       dispatch({ type: EXERCISE_DELETE_SUCCESS })
     } catch (error: any) {
       console.error(error)

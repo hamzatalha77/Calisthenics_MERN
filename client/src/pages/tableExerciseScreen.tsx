@@ -20,10 +20,9 @@ const TableExercise = () => {
     error: errorDelete,
     success: successDelete
   } = exerciseDelete
-  const deleteHandler = (id: string) => {
-    if (window.confirm('Are you sure')) {
-      dispatch(deleteExercise(id))
-    }
+  const deleteHandler = (exerciseId: string) => {
+    // Call the deleteExercise action with the exerciseId
+    dispatch(deleteExercise(exerciseId))
   }
   useEffect(() => {
     dispatch(listExercises())
