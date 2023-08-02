@@ -2,14 +2,16 @@ import { Request, Response } from 'express'
 import { ExerciseModel } from '../models/Exercises'
 import asyncHandler from 'express-async-handler'
 
-const allExercise = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const response = await ExerciseModel.find({})
-    res.json(response)
-  } catch (err) {
-    res.json(err)
+const allExercise = asyncHandler(
+  async (req: Request, res: Response): Promise<void> => {
+    try {
+      const response = await ExerciseModel.find({})
+      res.json(response)
+    } catch (err) {
+      res.json(err)
+    }
   }
-}
+)
 const getExerciseById = asyncHandler(async (req, res) => {
   const exercise = await ExerciseModel.findById(req.params.id)
   if (exercise) {
