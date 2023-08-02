@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import asyncHandler from 'express-async-handler'
 import { CategoryModel } from '../models/Category'
+import slugify from 'slugify'
 
 const getCategories = asyncHandler(async (req: Request, res: Response) => {
   try {
@@ -10,4 +11,11 @@ const getCategories = asyncHandler(async (req: Request, res: Response) => {
     res.json(error)
   }
 })
-export { getCategories }
+const createCategory = asyncHandler(async (req: Request, res: Response) => {
+  const name = req.body.name
+  const image = req.body.image
+  CategoryModel.create({ name, slug: slugify(name) })
+    .then((category) => res.status(201).json({ data: category }))
+    .catch((err) => res.status(400).send(err))
+})
+export { getCategories, createCategory }
