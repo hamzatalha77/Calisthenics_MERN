@@ -30,7 +30,7 @@ const CreateExerciseScreen = () => {
   useEffect(() => {
     if (successCreate) {
       dispatch({ type: EXERCISE_CREATE_RESET })
-      navigate('/saved-exercise')
+      navigate('/table-exercise')
     }
   }, [dispatch, successCreate, errorCreate, navigate])
 
