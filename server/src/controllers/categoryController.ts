@@ -13,8 +13,8 @@ const getCategories = asyncHandler(async (req: Request, res: Response) => {
 })
 const createCategory = asyncHandler(async (req: Request, res: Response) => {
   const name = req.body.name
-  const image = req.body.image
-  CategoryModel.create({ name, slug: slugify(name) })
+  const image_category = req.body.image_category
+  CategoryModel.create({ name, image_category, slug: slugify(name) })
     .then((category) => res.status(201).json({ data: category }))
     .catch((err) => res.status(400).send(err))
 })
