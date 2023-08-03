@@ -42,8 +42,16 @@ const uploadcategory = multer({
   }
 })
 
-router.post('/', uploadcategory.single('image_category'), (req, res) => {
-  res.send(`/${req.file?.path}`)
-})
+router.post(
+  '/',
+  uploadcategory.single('image_category'),
+  (req: Request, res: Response) => {
+    if (req.file) {
+      res.send(`/${req.file.path}`)
+    } else {
+      res.status(400).send('No file uploaded!')
+    }
+  }
+)
 
 export { router as categoryRouter }
