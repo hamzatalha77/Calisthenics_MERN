@@ -43,6 +43,10 @@ const exerciseSchema = new mongoose.Schema(
     userOwner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'users'
+    },
+    slug: {
+      type: String,
+      lowercase: true
     }
   },
   { timestamps: true }

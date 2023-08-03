@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import { ExerciseModel } from '../models/Exercises'
 import asyncHandler from 'express-async-handler'
+import slugify from 'slugify'
 
 const allExercise = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
@@ -26,6 +27,7 @@ const createExercise = asyncHandler(async (req, res) => {
   try {
     const exercise = new ExerciseModel({
       title: req.body.title,
+      slug: slugify(req.body.title),
       description: req.body.description,
       images: req.body.images,
       video: req.body.video,

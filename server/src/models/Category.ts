@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const categorySchema = new mongoose.Schema(
   {
-    name: {
+    category_name: {
       type: String,
       required: [true, 'Category Required'],
       unique: [true, 'Category must be unique'],

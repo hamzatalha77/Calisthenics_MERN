@@ -3,6 +3,7 @@ import { Request, Response } from 'express'
 import { ExerciseModel } from '../models/Exercises'
 import upload from '../middleware/multer'
 import { allExercise } from '../controllers/exerciseController'
+import slugify from 'slugify'
 
 const router = express.Router()
 
@@ -19,6 +20,7 @@ router.post('/', upload, async (req: Request, res: Response) => {
     )
     const data = {
       ...req.body,
+      slug: slugify(req.body.title),
       images: fileUrls
     } as any
     const exercises = new ExerciseModel(data)
