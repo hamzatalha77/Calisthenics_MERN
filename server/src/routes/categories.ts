@@ -7,6 +7,6 @@ import {
 
 const router = express.Router()
 
-router.route('/').get(getCategories).post(createCategory)
+router.route('/').post(createCategory).get(getCategories)
 
 export { router as categoryRouter }

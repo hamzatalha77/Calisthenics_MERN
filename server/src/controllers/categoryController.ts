@@ -1,4 +1,4 @@
-import { Request, Response } from 'express'
+import { Request, Response, NextFunction, Express } from 'express'
 import path from 'path'
 import multer from 'multer'
 import asyncHandler from 'express-async-handler'
@@ -11,19 +11,6 @@ const getCategories = asyncHandler(async (req: Request, res: Response) => {
     res.json(response)
   } catch (error) {
     res.json(error)
-  }
-})
-const createCategory = asyncHandler(async (req: Request, res: Response) => {
-  try {
-    const category = new CategoryModel({
-      category_name: req.body.category_name,
-      slug: slugify(req.body.category_name),
-      image_category: req.body.image_category
-    })
-    const createdCategory = await category.save()
-    res.status(201).json(createdCategory)
-  } catch (error: any) {
-    res.status(400).json({ message: error.message })
   }
 })
 
@@ -57,5 +44,31 @@ const uploadcategory = multer({
     checkFileType(file, cb)
   }
 })
+
+const createCategory = async (req: Request, res: Response) => {
+  try {
+    // Process the uploaded image using the multer middleware
+    uploadcategory.single('image_category')(req, res, async (err: any) => {
+      if (err) {
+        return res.status(400).json({ message: err.message })
+      }
+
+      if (!req.file) {
+        return res.status(400).json({ message: 'No file uploaded' })
+      }
+
+      const category = new CategoryModel({
+        category_name: req.body.category_name,
+        slug: slugify(req.body.category_name),
+        image_category: req.file.path // Use req.file.path to get the path of the uploaded image
+      })
+
+      const createdCategory = await category.save()
+      res.status(201).json(createdCategory)
+    })
+  } catch (error: any) {
+    res.status(400).json({ message: error.message })
+  }
+}
 
 export { getCategories, createCategory, uploadcategory }
