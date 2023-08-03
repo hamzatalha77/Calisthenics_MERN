@@ -23,7 +23,6 @@ app.use('/api/exercises', exerciseRouter)
 app.use('/api/upload', uploadRouter)
 app.use('/uploads', imagesRouter)
 app.use('/api/categories', categoryRouter)
-
 app.use('/api/uploadcategory', uploadCategoryRouter)
 
 // const __dirname = path.resolve()
