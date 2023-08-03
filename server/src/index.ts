@@ -7,6 +7,7 @@ import { exerciseRouter } from './routes/exercises'
 import { uploadRouter } from './routes/uploadRoute'
 import path from 'path'
 import { imagesRouter } from './routes/images'
+import { uploadCategoryRouter } from './routes/uploadCategoryRoute'
 import { categoryRouter } from './routes/categories'
 
 dotenv.config()
@@ -19,11 +20,11 @@ app.use(cors())
 
 app.use('/api/auth', userRouter)
 app.use('/api/exercises', exerciseRouter)
-app.use('/api/categories', categoryRouter)
 app.use('/api/upload', uploadRouter)
 app.use('/uploads', imagesRouter)
+app.use('/api/categories', categoryRouter)
 
-app.use('/api/uploadcategory', categoryRouter)
+app.use('/api/uploadcategory', uploadCategoryRouter)
 
 // const __dirname = path.resolve()
 
