@@ -15,7 +15,7 @@ const createCategory = asyncHandler(async (req: Request, res: Response) => {
   try {
     const category = new CategoryModel({
       name: req.body.name,
-      // slug: slugify(req.body.name),
+      slug: slugify(req.body.name),
       image_category: req.body.image_category
     })
     const createdCategory = await category.save()
