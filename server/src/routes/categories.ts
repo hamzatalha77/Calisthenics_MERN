@@ -42,7 +42,7 @@ const uploadcategory = multer({
   }
 })
 
-router.post('/', uploadcategory.single('image'), (req, res) => {
+router.post('/', uploadcategory.single('image_category'), (req, res) => {
   res.send(`/${req.file?.path}`)
 })
 

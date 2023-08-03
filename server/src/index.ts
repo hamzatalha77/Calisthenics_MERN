@@ -23,6 +23,8 @@ app.use('/api/categories', categoryRouter)
 app.use('/api/upload', uploadRouter)
 app.use('/uploads', imagesRouter)
 
+app.use('/api/uploadcategory', categoryRouter)
+
 // const __dirname = path.resolve()
 
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')))
