@@ -23,29 +23,29 @@ const getExerciseById = asyncHandler(async (req, res) => {
   }
 })
 
-const createExercise = asyncHandler(async (req, res) => {
-  try {
-    const exercise = new ExerciseModel({
-      title: req.body.title,
-      slug: slugify(req.body.title),
-      description: req.body.description,
-      images: req.body.images,
-      video: req.body.video,
-      tags: req.body.tags,
-      muscles: req.body.muscles,
-      technique: req.body.technique,
-      reps: req.body.reps,
-      sets: req.body.sets,
-      duration: req.body.duration,
-      userOwner: req.body.userOwner
-    })
-    console.log(req.body.images)
-    const createExercise = await exercise.save()
-    res.status(201).json(createExercise)
-  } catch (error: any) {
-    res.status(400).json({ message: error.message })
-  }
-})
+// const createExercise = asyncHandler(async (req, res) => {
+//   try {
+//     const exercise = new ExerciseModel({
+//       title: req.body.title,
+//       slug: slugify(req.body.title),
+//       description: req.body.description,
+//       images: req.body.images,
+//       video: req.body.video,
+//       tags: req.body.tags,
+//       muscles: req.body.muscles,
+//       technique: req.body.technique,
+//       reps: req.body.reps,
+//       sets: req.body.sets,
+//       duration: req.body.duration,
+//       userOwner: req.body.userOwner
+//     })
+//     console.log(req.body.images)
+//     const createExercise = await exercise.save()
+//     res.status(201).json(createExercise)
+//   } catch (error: any) {
+//     res.status(400).json({ message: error.message })
+//   }
+// })
 // const createExercise = asyncHandler(async (req, res) => {
 //   const exercise = new ExerciseModel({
 //     title: 'Exercise Title',
@@ -64,41 +64,41 @@ const createExercise = asyncHandler(async (req, res) => {
 //   res.status(201).json(createExercise)
 // })
 
-const updateExercise = asyncHandler(async (req, res) => {
-  const {
-    title,
-    description,
-    images,
-    video,
-    tags,
-    muscles,
-    technique,
-    reps,
-    sets,
-    duration,
-    userOwner
-  } = req.body
+// const updateExercise = asyncHandler(async (req, res) => {
+//   const {
+//     title,
+//     description,
+//     images,
+//     video,
+//     tags,
+//     muscles,
+//     technique,
+//     reps,
+//     sets,
+//     duration,
+//     userOwner
+//   } = req.body
 
-  const exercise = await ExerciseModel.findById(req.params.id)
-  if (exercise) {
-    exercise.title = title
-    exercise.description = description
-    exercise.images = images
-    exercise.video = video
-    exercise.tags = tags
-    exercise.muscles = muscles
-    exercise.technique = technique
-    exercise.reps = reps
-    exercise.sets = sets
-    exercise.duration = duration
-    exercise.userOwner = userOwner
-    const updateExercise = await exercise.save()
-    res.status(201).json(updateExercise)
-  } else {
-    res.status(404)
-    throw new Error('Resource not found')
-  }
-})
+//   const exercise = await ExerciseModel.findById(req.params.id)
+//   if (exercise) {
+//     exercise.title = title
+//     exercise.description = description
+//     exercise.images = images
+//     exercise.video = video
+//     exercise.tags = tags
+//     exercise.muscles = muscles
+//     exercise.technique = technique
+//     exercise.reps = reps
+//     exercise.sets = sets
+//     exercise.duration = duration
+//     exercise.userOwner = userOwner
+//     const updateExercise = await exercise.save()
+//     res.status(201).json(updateExercise)
+//   } else {
+//     res.status(404)
+//     throw new Error('Resource not found')
+//   }
+// })
 
 const deleteExercise = asyncHandler(async (req: Request, res: Response) => {
   const exercise = await ExerciseModel.findByIdAndDelete(req.params.id)
@@ -112,8 +112,8 @@ const deleteExercise = asyncHandler(async (req: Request, res: Response) => {
 
 export {
   allExercise,
-  createExercise,
-  updateExercise,
+  // createExercise,
+  // updateExercise,
   getExerciseById,
   deleteExercise
 }

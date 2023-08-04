@@ -1,20 +1,20 @@
 import express from 'express'
 import {
   allExercise,
-  createExercise,
+  // createExercise,
   deleteExercise,
-  getExerciseById,
-  updateExercise
+  getExerciseById
+  // updateExercise
 } from '../controllers/exerciseController'
 
 const router = express.Router()
 
 router.route('/').get(allExercise)
 
-router.route('/').post(createExercise)
+// router.route('/').post(createExercise)
 router
   .route('/:id')
-  .put(updateExercise)
+
   .get(getExerciseById)
   .delete(deleteExercise)
 
