@@ -71,7 +71,7 @@ const createExercise =
           'Content-Type': 'multipart/form-data'
         }
       }
-      const { data } = await axios.post(`/api/upload`, exercise, config)
+      const { data } = await axios.post(`/api/exercises`, exercise, config)
 
       dispatch({ type: EXERCISE_CREATE_SUCCESS, payload: data })
     } catch (error: any) {
@@ -97,7 +97,7 @@ const updateExercise =
       }
 
       const { data } = await axios.put(
-        `/api/upload/${exercise._id}`,
+        `/api/exercises/${exercise._id}`,
         exercise,
         config
       )

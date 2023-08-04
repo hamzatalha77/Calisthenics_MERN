@@ -4,7 +4,6 @@ import cors from 'cors'
 import connectDB from './config/database'
 import { userRouter } from './routes/users'
 import { exerciseRouter } from './routes/exercises'
-import { uploadRouter } from './routes/uploadRoute'
 import path from 'path'
 import { imagesRouter } from './routes/images'
 import { categoryRouter } from './routes/categories'
@@ -19,7 +18,6 @@ app.use(cors())
 
 app.use('/api/auth', userRouter)
 app.use('/api/exercises', exerciseRouter)
-app.use('/api/upload', uploadRouter)
 app.use('/uploads', imagesRouter)
 app.use('/api/categories', categoryRouter)
 
