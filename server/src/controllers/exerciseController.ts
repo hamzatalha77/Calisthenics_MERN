@@ -58,7 +58,7 @@ const updateExercise = asyncHandler(
           return res.status(400).json({ error: err.message })
         }
 
-        const updatedData = req.body
+        const updatedData = { ...req.body, slug: slugify(req.body.title) }
         const exercise = await ExerciseModel.findById(req.params.id)
 
         if (!exercise) {

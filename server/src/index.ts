@@ -18,8 +18,8 @@ app.use(cors())
 
 app.use('/api/auth', userRouter)
 app.use('/api/exercises', exerciseRouter)
-app.use('/uploads', imagesRouter)
 app.use('/api/categories', categoryRouter)
+app.use('/uploads', imagesRouter)
 
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')))
 app.get('/', (req, res) => {
