@@ -37,7 +37,7 @@ function checkFileType(
   }
 }
 
-const upload = multer({
+const multipleUpload = multer({
   storage,
   fileFilter: function (
     req: Request,
@@ -48,4 +48,11 @@ const upload = multer({
   }
 }).array('images[]', 5)
 
-export default upload
+const singleUpload = multer({
+  storage,
+  fileFilter: function (req: Request, file: any, cb: any) {
+    checkFileType(file, cb)
+  }
+})
+
+export { multipleUpload, singleUpload }

@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { ExerciseModel } from '../models/Exercises'
 import asyncHandler from 'express-async-handler'
 import slugify from 'slugify'
-import upload from '../middleware/multer'
+import { multipleUpload } from '../middleware/multer'
 
 const allExercise = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
@@ -17,7 +17,7 @@ const allExercise = asyncHandler(
 const createExercise = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
     try {
-      upload(req, res, async (err: any) => {
+      multipleUpload(req, res, async (err: any) => {
         if (err) {
           return res.status(400).json({ error: err.message })
         }
@@ -53,7 +53,7 @@ const createExercise = asyncHandler(
 const updateExercise = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
     try {
-      upload(req, res, async (err: any) => {
+      multipleUpload(req, res, async (err: any) => {
         if (err) {
           return res.status(400).json({ error: err.message })
         }

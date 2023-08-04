@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import asyncHandler from 'express-async-handler'
 import { CategoryModel } from '../models/Category'
 import slugify from 'slugify'
-import { uploadcategory } from '../middleware/categoryMulter'
+import { singleUpload } from '../middleware/multer'
 
 const getCategories = asyncHandler(async (req: Request, res: Response) => {
   try {
@@ -15,7 +15,7 @@ const getCategories = asyncHandler(async (req: Request, res: Response) => {
 
 const createCategory = async (req: Request, res: Response) => {
   try {
-    uploadcategory.single('image_category')(req, res, async (err: any) => {
+    singleUpload.single('image_category')(req, res, async (err: any) => {
       if (err) {
         return res.status(400).json({ message: err.message })
       }
@@ -48,7 +48,7 @@ const updateCategory = async (req: Request, res: Response) => {
       return res.status(404).json({ message: 'Category not found' })
     }
 
-    uploadcategory.single('image_category')(req, res, async (err: any) => {
+    singleUpload.single('image_category')(req, res, async (err: any) => {
       if (err) {
         return res.status(400).json({ message: err.message })
       }
@@ -75,10 +75,4 @@ const deleteCategory = asyncHandler(async (req: Request, res: Response) => {
     throw new Error('Category not found')
   }
 })
-export {
-  getCategories,
-  createCategory,
-  uploadcategory,
-  updateCategory,
-  deleteCategory
-}
+export { getCategories, createCategory, updateCategory, deleteCategory }
