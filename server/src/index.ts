@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express'
+import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import connectDB from './config/database'
@@ -7,7 +7,6 @@ import { exerciseRouter } from './routes/exercises'
 import { uploadRouter } from './routes/uploadRoute'
 import path from 'path'
 import { imagesRouter } from './routes/images'
-// import { uploadCategoryRouter } from './routes/uploadCategoryRoute'
 import { categoryRouter } from './routes/categories'
 
 dotenv.config()
@@ -23,9 +22,6 @@ app.use('/api/exercises', exerciseRouter)
 app.use('/api/upload', uploadRouter)
 app.use('/uploads', imagesRouter)
 app.use('/api/categories', categoryRouter)
-// app.use('/api/uploadcategory', uploadCategoryRouter)
-
-// const __dirname = path.resolve()
 
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')))
 app.get('/', (req, res) => {
