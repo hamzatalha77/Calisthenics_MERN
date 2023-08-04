@@ -53,6 +53,6 @@ const singleUpload = multer({
   fileFilter: function (req: Request, file: any, cb: any) {
     checkFileType(file, cb)
   }
-})
+}).single('image_category')
 
 export { multipleUpload, singleUpload }

@@ -15,7 +15,7 @@ const getCategories = asyncHandler(async (req: Request, res: Response) => {
 
 const createCategory = async (req: Request, res: Response) => {
   try {
-    singleUpload.single('image_category')(req, res, async (err: any) => {
+    singleUpload(req, res, async (err: any) => {
       if (err) {
         return res.status(400).json({ message: err.message })
       }
@@ -48,7 +48,7 @@ const updateCategory = async (req: Request, res: Response) => {
       return res.status(404).json({ message: 'Category not found' })
     }
 
-    singleUpload.single('image_category')(req, res, async (err: any) => {
+    singleUpload(req, res, async (err: any) => {
       if (err) {
         return res.status(400).json({ message: err.message })
       }
