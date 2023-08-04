@@ -6,8 +6,6 @@ import {
   getExerciseById,
   updateExercise
 } from '../controllers/exerciseController'
-import upload from '../middleware/multer'
-
 const router = express.Router()
 
 router.route('/').get(allExercise).post(createExercise)
