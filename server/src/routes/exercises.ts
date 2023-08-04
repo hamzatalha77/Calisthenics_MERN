@@ -10,10 +10,10 @@ import upload from '../middleware/multer'
 
 const router = express.Router()
 
-router.route('/').get(allExercise).post(upload, createExercise)
+router.route('/').get(allExercise).post(createExercise)
 router
   .route('/:id')
-  .put(upload, updateExercise)
+  .put(updateExercise)
   .get(getExerciseById)
   .delete(deleteExercise)
 

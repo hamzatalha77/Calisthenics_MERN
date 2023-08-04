@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import { ExerciseModel } from '../models/Exercises'
 import asyncHandler from 'express-async-handler'
 import slugify from 'slugify'
+import upload from '../middleware/multer'
 
 const allExercise = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
@@ -15,54 +16,70 @@ const allExercise = asyncHandler(
 )
 const createExercise = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
-    const fileArray = req.files as Express.Multer.File[]
-    if (fileArray) {
-      const fileUrls = fileArray.map(
-        (file: Express.Multer.File) =>
-          `${req.protocol}://${req.get('host')}/${file.path
-            .replace('[]', '')
-            .replace(/\\/g, '/')}`
-      )
-      const data = {
-        ...req.body,
-        slug: slugify(req.body.title),
-        images: fileUrls
-      } as any
-      const exercises = new ExerciseModel(data)
-      await exercises.save()
-      res.json(exercises)
-    } else {
-      res.status(400).json({ error: 'No files were uploaded.' })
-    }
-  }
-)
-const updateExercise = asyncHandler(
-  async (req: Request, res: Response): Promise<void> => {
     try {
-      const updatedData = req.body
+      upload(req, res, async (err: any) => {
+        if (err) {
+          return res.status(400).json({ error: err.message })
+        }
 
-      const exercise = await ExerciseModel.findById(req.params.id)
-
-      if (!exercise) {
-        res.status(404).json({ error: 'Exercise not found.' })
-        return
-      }
-
-      if (Array.isArray(req.files) && req.files.length > 0) {
         const fileArray = req.files as Express.Multer.File[]
+
+        if (!fileArray || fileArray.length === 0) {
+          return res.status(400).json({ error: 'No files were uploaded.' })
+        }
+
         const fileUrls = fileArray.map(
           (file: Express.Multer.File) =>
             `${req.protocol}://${req.get('host')}/${file.path
               .replace('[]', '')
               .replace(/\\/g, '/')}`
         )
-        updatedData.images = fileUrls
-      }
 
-      exercise.set(updatedData)
-      await exercise.save()
+        const data = {
+          ...req.body,
+          slug: slugify(req.body.title),
+          images: fileUrls
+        } as any
 
-      res.json(exercise)
+        const exercises = new ExerciseModel(data)
+        await exercises.save()
+        res.json(exercises)
+      })
+    } catch (error: any) {
+      res.status(400).json({ error: error.message })
+    }
+  }
+)
+const updateExercise = asyncHandler(
+  async (req: Request, res: Response): Promise<void> => {
+    try {
+      upload(req, res, async (err: any) => {
+        if (err) {
+          return res.status(400).json({ error: err.message })
+        }
+
+        const updatedData = req.body
+        const exercise = await ExerciseModel.findById(req.params.id)
+
+        if (!exercise) {
+          return res.status(404).json({ error: 'Exercise not found.' })
+        }
+
+        if (Array.isArray(req.files) && req.files.length > 0) {
+          const fileArray = req.files as Express.Multer.File[]
+          const fileUrls = fileArray.map(
+            (file: Express.Multer.File) =>
+              `${req.protocol}://${req.get('host')}/${file.path
+                .replace('[]', '')
+                .replace(/\\/g, '/')}`
+          )
+          updatedData.images = fileUrls
+        }
+
+        exercise.set(updatedData)
+        await exercise.save()
+        res.json(exercise)
+      })
     } catch (error) {
       res
         .status(500)
