@@ -66,4 +66,28 @@ const updateCategory = async (req: Request, res: Response) => {
     res.status(400).json({ message: error.message })
   }
 }
-export { getCategories, createCategory, uploadcategory, updateCategory }
+const deleteCategory = async (req: Request, res: Response) => {
+  try {
+    const categoryId = req.params.id
+
+    const category = await CategoryModel.findByIdAndDelete(categoryId)
+
+    if (!category) {
+      return res.status(404).json({ message: 'Category not found' })
+    } else {
+      res
+        .status(204)
+        .json({ message: 'Category has been deleted with success' })
+    }
+  } catch (error: any) {
+    res.status(500).json({ message: 'Error deleting category' })
+  }
+}
+
+export {
+  getCategories,
+  createCategory,
+  uploadcategory,
+  updateCategory,
+  deleteCategory
+}
