@@ -16,7 +16,10 @@ const getSubcategories = asyncHandler(async (req: Request, res: Response) => {
 })
 
 const getSubcategory = asyncHandler(async (req: Request, res: Response) => {
-  const subcategory = await SubCategoryModel.findById(req.params.id)
+  const subcategory = await SubCategoryModel.findById(req.params.id).populate({
+    path: 'category',
+    select: 'category_name -_id'
+  })
   if (subcategory) {
     res.json(subcategory)
   } else {
