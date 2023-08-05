@@ -14,6 +14,15 @@ const allExercise = asyncHandler(
     }
   }
 )
+const getExerciseById = asyncHandler(async (req, res) => {
+  const exercise = await ExerciseModel.findById(req.params.id)
+  if (exercise) {
+    res.json(exercise)
+  } else {
+    res.status(404)
+    throw new Error('Exercise Not Found')
+  }
+})
 const createExercise = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
     try {
@@ -87,15 +96,6 @@ const updateExercise = asyncHandler(
     }
   }
 )
-const getExerciseById = asyncHandler(async (req, res) => {
-  const exercise = await ExerciseModel.findById(req.params.id)
-  if (exercise) {
-    res.json(exercise)
-  } else {
-    res.status(404)
-    throw new Error('Exercise Not Found')
-  }
-})
 
 const deleteExercise = asyncHandler(async (req: Request, res: Response) => {
   const exercise = await ExerciseModel.findByIdAndDelete(req.params.id)

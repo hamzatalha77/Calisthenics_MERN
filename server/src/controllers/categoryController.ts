@@ -13,6 +13,16 @@ const getCategories = asyncHandler(async (req: Request, res: Response) => {
   }
 })
 
+const getCategory = asyncHandler(async (req: Request, res: Response) => {
+  const category = await CategoryModel.findById(req.params.id)
+  if (category) {
+    res.json(category)
+  } else {
+    res.status(404)
+    throw new Error('Category Not Found')
+  }
+})
+
 const createCategory = async (req: Request, res: Response) => {
   try {
     singleUpload(req, res, async (err: any) => {
@@ -75,4 +85,10 @@ const deleteCategory = asyncHandler(async (req: Request, res: Response) => {
     throw new Error('Category not found')
   }
 })
-export { getCategories, createCategory, updateCategory, deleteCategory }
+export {
+  getCategories,
+  createCategory,
+  updateCategory,
+  deleteCategory,
+  getCategory
+}
