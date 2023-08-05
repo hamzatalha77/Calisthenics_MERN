@@ -6,8 +6,8 @@ import { singleUpload } from '../middleware/multer'
 
 const getCategories = asyncHandler(async (req: Request, res: Response) => {
   try {
-    const response = await CategoryModel.find({})
-    res.json(response)
+    const category = await CategoryModel.find({})
+    res.json(category)
   } catch (error) {
     res.json(error)
   }
