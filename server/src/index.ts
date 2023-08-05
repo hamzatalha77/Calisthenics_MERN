@@ -7,6 +7,7 @@ import { exerciseRouter } from './routes/exercises'
 import path from 'path'
 import { imagesRouter } from './routes/images'
 import { categoryRouter } from './routes/categories'
+import { subcategoryRouter } from './routes/subcategories'
 
 dotenv.config()
 
@@ -19,6 +20,7 @@ app.use(cors())
 app.use('/api/auth', userRouter)
 app.use('/api/exercises', exerciseRouter)
 app.use('/api/categories', categoryRouter)
+app.use('/api/subcategories', subcategoryRouter)
 app.use('/uploads', imagesRouter)
 
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')))
