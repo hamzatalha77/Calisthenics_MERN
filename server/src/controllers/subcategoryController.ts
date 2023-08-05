@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import asyncHandler from 'express-async-handler'
-import { SubCategoryModel } from '../models/SubCategory'
+import { SubCategoryModel } from '../models/SubCategories'
 import slugify from 'slugify'
 
 const createSubcategory = asyncHandler(async (req: Request, res: Response) => {

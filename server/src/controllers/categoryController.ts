@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import asyncHandler from 'express-async-handler'
-import { CategoryModel } from '../models/Category'
+import { CategoryModel } from '../models/Categories'
 import slugify from 'slugify'
 import { singleUpload } from '../middleware/multer'
 
