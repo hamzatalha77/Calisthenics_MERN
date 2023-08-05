@@ -1,13 +1,19 @@
 import express from 'express'
 import {
   createSubcategory,
+  deleteSubcategory,
   getSubcategories,
-  getSubcategory
+  getSubcategory,
+  updateSubcategory
 } from '../controllers/subcategoryController'
 
 const router = express.Router()
 
 router.route('/').post(createSubcategory).get(getSubcategories)
-router.route('/:id').get(getSubcategory)
+router
+  .route('/:id')
+  .get(getSubcategory)
+  .put(updateSubcategory)
+  .delete(deleteSubcategory)
 
 export { router as subcategoryRouter }

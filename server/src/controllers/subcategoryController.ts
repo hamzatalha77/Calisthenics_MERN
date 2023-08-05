@@ -36,4 +36,34 @@ const createSubcategory = asyncHandler(async (req: Request, res: Response) => {
   }
 })
 
-export { createSubcategory, getSubcategories, getSubcategory }
+const updateSubcategory = asyncHandler(async (req: Request, res: Response) => {
+  const { id } = req.params
+  const { subcategory_name, category } = req.body
+  const subcategory = await SubCategoryModel.findOneAndUpdate(
+    { _id: id },
+    { subcategory_name, slug: slugify(subcategory_name), category },
+    { new: true }
+  )
+  if (!subcategory) {
+    res.status(404).json({ message: 'Subcategory Not Found' })
+  }
+  res.status(201).json({ data: subcategory })
+})
+
+const deleteSubcategory = asyncHandler(async (req: Request, res: Response) => {
+  const { id } = req.params
+
+  const subcategory = await SubCategoryModel.findOneAndDelete({ _id: id })
+  if (!subcategory) {
+    res.status(404).json({ message: 'Subcategory Not Found' })
+  }
+  res.status(201).json({ message: 'Subcategory has been deleted !!' })
+})
+
+export {
+  createSubcategory,
+  getSubcategories,
+  getSubcategory,
+  updateSubcategory,
+  deleteSubcategory
+}
