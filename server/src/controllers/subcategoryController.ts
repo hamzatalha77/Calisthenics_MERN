@@ -34,10 +34,13 @@ const getSubcategory = asyncHandler(async (req: Request, res: Response) => {
 
 const createSubcategory = asyncHandler(async (req: Request, res: Response) => {
   try {
+    if (!req.body.category) req.body.category = req.params.categoryId
+
+    const { subcategory_name, category } = req.body
     const subcategory = new SubCategoryModel({
-      subcategory_name: req.body.subcategory_name,
+      subcategory_name,
       slug: slugify(req.body.subcategory_name),
-      category: req.body.category
+      category
     })
     await subcategory.save()
     res.status(201).json({ data: subcategory })
