@@ -5,9 +5,10 @@ import slugify from 'slugify'
 
 const getSubcategories = asyncHandler(async (req: Request, res: Response) => {
   try {
-    const filterObject = {}
+    let filterObject = {}
     if (req.params.categoryId)
       filterObject = { category: req.params.categoryId }
+    console.log(req.params.categoryId)
     const subcategory = await SubCategoryModel.find(filterObject).populate({
       path: 'category',
       select: 'category_name'

@@ -7,7 +7,7 @@ import {
   updateSubcategory
 } from '../controllers/subcategoryController'
 
-const router = express.Router()
+const router = express.Router({ mergeParams: true })
 
 router.route('/').post(createSubcategory).get(getSubcategories)
 router
