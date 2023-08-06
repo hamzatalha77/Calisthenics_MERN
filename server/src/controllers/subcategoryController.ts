@@ -5,9 +5,12 @@ import slugify from 'slugify'
 
 const getSubcategories = asyncHandler(async (req: Request, res: Response) => {
   try {
-    const subcategory = await SubCategoryModel.find({}).populate({
+    const filterObject = {}
+    if (req.params.categoryId)
+      filterObject = { category: req.params.categoryId }
+    const subcategory = await SubCategoryModel.find(filterObject).populate({
       path: 'category',
-      select: 'category_name -_id'
+      select: 'category_name'
     })
     res.json(subcategory)
   } catch (error) {
@@ -18,7 +21,7 @@ const getSubcategories = asyncHandler(async (req: Request, res: Response) => {
 const getSubcategory = asyncHandler(async (req: Request, res: Response) => {
   const subcategory = await SubCategoryModel.findById(req.params.id).populate({
     path: 'category',
-    select: 'category_name -_id'
+    select: 'category_name'
   })
   if (subcategory) {
     res.json(subcategory)
