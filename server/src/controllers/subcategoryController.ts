@@ -11,7 +11,7 @@ const getSubcategories = asyncHandler(async (req: Request, res: Response) => {
     console.log(req.params.categoryId)
     const subcategory = await SubCategoryModel.find(filterObject).populate({
       path: 'category',
-      select: 'category_name'
+      select: 'category_name -_id'
     })
     res.json(subcategory)
   } catch (error) {
