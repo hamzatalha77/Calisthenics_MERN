@@ -69,7 +69,7 @@ const EditExercise = ({ match, history }: any) => {
         setCategory(exercise.category)
         console.log('Category set to:', exercise.category)
       }
-      // Reset category when exercise details are loaded
+
       setCategory('')
     }
   }, [dispatch, exerciseId, successUpdate, exercise, history])
