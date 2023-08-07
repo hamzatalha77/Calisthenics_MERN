@@ -63,6 +63,7 @@ const EditExercise = ({ match, history }: any) => {
         setTitle(exercise.title)
         setImages(exercise.images || [])
         setCategory(exercise.category)
+        console.log('Category set to:', exercise.category)
       }
     }
   }, [dispatch, exerciseId, successUpdate, exercise, history])
@@ -102,7 +103,8 @@ const EditExercise = ({ match, history }: any) => {
       updateExercise({
         _id: exerciseId,
         title,
-        images: imagesToUpload
+        images: imagesToUpload,
+        category
       })
     )
     setImagesToUpload(undefined)
@@ -148,7 +150,7 @@ const EditExercise = ({ match, history }: any) => {
           </label>
           <select
             id="categories"
-            value={category}
+            defaultValue={category}
             onChange={(e) => setCategory(e.target.value)}
           >
             {Array.isArray(categories) &&
@@ -158,6 +160,7 @@ const EditExercise = ({ match, history }: any) => {
                 </option>
               ))}
           </select>
+
           <label
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             htmlFor="multiple_files"
