@@ -2,6 +2,10 @@ export interface ExerciseAction {
   type: string
   payload?: any
 }
+export interface CategoryAction {
+  type: string
+  payload?: any
+}
 
 export interface Exercise {
   _id: string
