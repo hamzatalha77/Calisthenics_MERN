@@ -148,12 +148,12 @@ const EditExercise = ({ match, history }: any) => {
               </div>
             ))}
           </div>
-          {/* <label
+          <label
             htmlFor="categories"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Select an option
-          </label> */}
+          </label>
           <select
             id="categories"
             value={category}
