@@ -18,7 +18,10 @@ const allExercise = asyncHandler(
   }
 )
 const getExerciseById = asyncHandler(async (req, res) => {
-  const exercise = await ExerciseModel.findById(req.params.id)
+  const exercise = await ExerciseModel.findById(req.params.id).populate({
+    path: 'category',
+    select: 'category_name -_id'
+  })
   if (exercise) {
     res.json(exercise)
   } else {
