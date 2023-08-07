@@ -24,23 +24,23 @@ const CreateExerciseScreen = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch<Dispatch<any>>()
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const exerciseCreate = useSelector(
-    (state: RootStateExerciseCreate) => state.exerciseCreate
-  )
-
-  const { success: successCreate, error: errorCreate } = exerciseCreate
 
   const categoryList = useSelector(
     (state: RootStateCategoryList) => state.categoryList
   )
-
   const { loading: loadingList, error: errorList, categories } = categoryList
+
+  const exerciseCreate = useSelector(
+    (state: RootStateExerciseCreate) => state.exerciseCreate
+  )
+  const { success: successCreate, error: errorCreate } = exerciseCreate
+
   useEffect(() => {
+    dispatch(listCategories())
     if (successCreate) {
       dispatch({ type: EXERCISE_CREATE_RESET })
       navigate('/table-exercise')
     }
-    dispatch(listCategories())
   }, [dispatch, successCreate, errorCreate, navigate])
 
   // const uploadFileHandler = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -146,7 +146,7 @@ const CreateExerciseScreen = () => {
           </div>
 
           <label
-            htmlFor="countries"
+            htmlFor="categories"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Select an option
@@ -155,12 +155,11 @@ const CreateExerciseScreen = () => {
             id="categories"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
             <option value="" disabled>
               Choose a category
             </option>
-            {categories.map((category) => (
+            {categories?.map((category) => (
               <option key={category._id} value={category._id}>
                 {category.category_name}
               </option>

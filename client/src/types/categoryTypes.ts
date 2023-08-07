@@ -1,3 +1,7 @@
+export interface CategoryAction {
+  type: string
+  payload?: any
+}
 export interface Category {
   _id: string
   category_name: string
@@ -24,8 +28,5 @@ export interface RootStateCategoryList {
     categories: Category[]
   }
 }
-export interface CategoryAction {
-  type: string
-  payload?: any
-}
+
 export { initialState }
