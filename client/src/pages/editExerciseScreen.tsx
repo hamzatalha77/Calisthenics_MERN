@@ -65,6 +65,8 @@ const EditExercise = ({ match, history }: any) => {
         setCategory(exercise.category)
         console.log('Category set to:', exercise.category)
       }
+      // Reset category when exercise details are loaded
+      setCategory('')
     }
   }, [dispatch, exerciseId, successUpdate, exercise, history])
 
@@ -150,7 +152,7 @@ const EditExercise = ({ match, history }: any) => {
           </label>
           <select
             id="categories"
-            defaultValue={category}
+            defaultValue={category} // Make sure category is a valid value from the Redux store
             onChange={(e) => setCategory(e.target.value)}
           >
             {Array.isArray(categories) &&
