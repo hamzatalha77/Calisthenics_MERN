@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootStateExerciseDelete, RootStateExerciseList } from '../types/index'
+import {
+  RootStateExerciseDelete,
+  RootStateExerciseList
+} from '../types/exerciseTypes'
 import { deleteExercise, listExercises } from '../actions/exerciseActions'
 import { Dispatch } from 'redux'
 import { Link } from 'react-router-dom'

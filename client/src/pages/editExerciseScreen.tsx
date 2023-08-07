@@ -7,7 +7,10 @@ import {
   updateExercise,
   listExercisesDetails
 } from '../actions/exerciseActions'
-import { RootStateExerciseDetails, RootStateExerciseUpdate } from '../types'
+import {
+  RootStateExerciseDetails,
+  RootStateExerciseUpdate
+} from '../types/exerciseTypes'
 
 const EditExercise = ({ match, history }: any) => {
   const { exerciseId } = useParams<{ exerciseId: string }>()

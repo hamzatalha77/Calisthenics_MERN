@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { EXERCISE_CREATE_RESET } from '../constants/ExerciseConstants'
 import { createExercise } from '../actions/exerciseActions'
-import { RootStateExerciseCreate } from '../types'
+import { RootStateExerciseCreate } from '../types/exerciseTypes'
 
 const CreateExerciseScreen = () => {
   const [title, setTitle] = useState<string>('')

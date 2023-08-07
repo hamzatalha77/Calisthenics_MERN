@@ -16,7 +16,7 @@ import {
   EXERCISE_DELETE_SUCCESS,
   EXERCISE_DELETE_FAIL
 } from '../constants/ExerciseConstants'
-import { ExerciseAction } from '../types'
+import { ExerciseAction } from '../types/exerciseTypes'
 
 const listExercises =
   () => async (dispatch: (action: ExerciseAction) => void) => {

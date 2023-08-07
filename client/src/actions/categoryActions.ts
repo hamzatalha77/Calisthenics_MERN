@@ -4,7 +4,7 @@ import {
   CATEGORY_LIST_SUCCESS,
   CATEGORY_LIST_FAIL
 } from '../constants/CategoryConstants'
-import { CategoryAction } from '../types'
+import { CategoryAction } from '../types/categoryTypes'
 
 const listCategories =
   () => async (dispatch: (action: CategoryAction) => void) => {

@@ -19,7 +19,7 @@ import {
   EXERCISE_LIST_REQUEST,
   EXERCISE_LIST_SUCCESS
 } from '../constants/ExerciseConstants'
-import { ExerciseAction, initialState } from '../types'
+import { ExerciseAction, initialState } from '../types/exerciseTypes'
 
 const exerciseListReducers = (state = initialState, action: ExerciseAction) => {
   switch (action.type) {
