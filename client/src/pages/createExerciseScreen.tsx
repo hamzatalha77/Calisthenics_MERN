@@ -41,7 +41,7 @@ const CreateExerciseScreen = () => {
       dispatch({ type: EXERCISE_CREATE_RESET })
       navigate('/table-exercise')
     }
-  }, [dispatch, successCreate, errorCreate, navigate])
+  }, [dispatch, successCreate, navigate])
 
   // const uploadFileHandler = async (e: ChangeEvent<HTMLInputElement>) => {
   //   const fileInput = e.target as HTMLInputElement
@@ -159,11 +159,12 @@ const CreateExerciseScreen = () => {
             <option value="" disabled>
               Choose a category
             </option>
-            {categories?.map((category) => (
-              <option key={category._id} value={category._id}>
-                {category.category_name}
-              </option>
-            ))}
+            {Array.isArray(categories) &&
+              categories.map((category) => (
+                <option key={category._id} value={category._id}>
+                  {category.category_name}
+                </option>
+              ))}
           </select>
 
           <div>
