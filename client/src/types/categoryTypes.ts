@@ -16,8 +16,8 @@ const initialState: CategoryListState = {
   error: false,
   categories: []
 }
-export interface RootStateExerciseList {
-  exerciseList: {
+export interface RootStateCategoryList {
+  categoryList: {
     loading: boolean
     success: boolean
     error: boolean

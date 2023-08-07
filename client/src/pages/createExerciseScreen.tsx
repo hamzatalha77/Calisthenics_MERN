@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router'
 import { EXERCISE_CREATE_RESET } from '../constants/ExerciseConstants'
 import { createExercise } from '../actions/exerciseActions'
 import { RootStateExerciseCreate } from '../types/exerciseTypes'
+import { RootStateCategoryList } from '../types/categoryTypes'
+import { listCategories } from '../actions/categoryActions'
 
 const CreateExerciseScreen = () => {
   const [title, setTitle] = useState<string>('')
@@ -17,6 +19,7 @@ const CreateExerciseScreen = () => {
   const [sets, setSets] = useState<string>('')
   const [duration, setDuration] = useState<string>('')
   const [images, setImages] = useState<string[]>([])
+  const [category, setCatgory] = useState<string>('')
   const [imagesToUpload, setImagesToUpload] = useState<File[]>()
   const navigate = useNavigate()
   const dispatch = useDispatch<Dispatch<any>>()
@@ -27,11 +30,17 @@ const CreateExerciseScreen = () => {
 
   const { success: successCreate, error: errorCreate } = exerciseCreate
 
+  const categoryList = useSelector(
+    (state: RootStateCategoryList) => state.categoryList
+  )
+
+  const { loading: loadingList, error: errorList, categories } = categoryList
   useEffect(() => {
     if (successCreate) {
       dispatch({ type: EXERCISE_CREATE_RESET })
       navigate('/table-exercise')
     }
+    dispatch(listCategories())
   }, [dispatch, successCreate, errorCreate, navigate])
 
   // const uploadFileHandler = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -86,6 +95,7 @@ const CreateExerciseScreen = () => {
         description,
         images: imagesToUpload,
         video,
+        category,
         tags,
         muscles,
         technique,
@@ -134,6 +144,29 @@ const CreateExerciseScreen = () => {
               onChange={(e) => setDescription(e.target.value)}
             />
           </div>
+
+          <label
+            htmlFor="countries"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Select an option
+          </label>
+          <select
+            id="categories"
+            value={category}
+            onChange={(e) => setCatgory(e.target.value)}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          >
+            <option value="" disabled selected>
+              Choose a category
+            </option>
+            {categories.map((category) => (
+              <option key={category._id} value={category._id}>
+                {category.category_name}
+              </option>
+            ))}
+          </select>
+
           <div>
             <div className="theimage">
               {images.map((imagePath, index) => (
