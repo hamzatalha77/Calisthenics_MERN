@@ -47,7 +47,18 @@ const exerciseSchema = new mongoose.Schema(
     slug: {
       type: String,
       lowercase: true
-    }
+    },
+    category: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'categories',
+      required: [true, 'Exercise must be belong to category']
+    },
+    subcategory: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'subcategories'
+      }
+    ]
   },
   { timestamps: true }
 )
