@@ -7,7 +7,10 @@ import { multipleUpload } from '../middleware/multer'
 const allExercise = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
     try {
-      const response = await ExerciseModel.find({})
+      const response = await ExerciseModel.find({}).populate({
+        path: 'category',
+        select: 'category_name -_id'
+      })
       res.json(response)
     } catch (err) {
       res.json(err)
