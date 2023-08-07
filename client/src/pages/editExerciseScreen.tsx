@@ -52,14 +52,18 @@ const EditExercise = ({ match, history }: any) => {
   } = exerciseUpdate
 
   useEffect(() => {
+    console.log('Fetching exercise details and categories...')
     dispatch(listCategories())
     if (successUpdate) {
+      console.log('Update success, redirecting...')
       dispatch({ type: EXERCISE_UPDATE_RESET })
       navigate('/table-exercise')
     } else {
       if (!exercise.title || exercise._id !== exerciseId) {
+        console.log('Fetching exercise details...')
         dispatch(listExercisesDetails(exerciseId))
       } else {
+        console.log('Setting exercise details...')
         setTitle(exercise.title)
         setImages(exercise.images || [])
         setCategory(exercise.category)
@@ -144,16 +148,18 @@ const EditExercise = ({ match, history }: any) => {
               </div>
             ))}
           </div>
-          <label
+          {/* <label
             htmlFor="categories"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Select an option
-          </label>
+          </label> */}
           <select
-            id="categories"
-            defaultValue={category} // Make sure category is a valid value from the Redux store
-            onChange={(e) => setCategory(e.target.value)}
+            value={category}
+            onChange={(e) => {
+              console.log('Select change:', e.target.value)
+              setCategory(e.target.value)
+            }}
           >
             {Array.isArray(categories) &&
               categories.map((category) => (
