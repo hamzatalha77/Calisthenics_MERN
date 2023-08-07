@@ -155,15 +155,13 @@ const EditExercise = ({ match, history }: any) => {
             Select an option
           </label> */}
           <select
+            id="categories"
             value={category}
-            onChange={(e) => {
-              console.log('Select change:', e.target.value)
-              setCategory(e.target.value)
-            }}
+            onChange={(e) => setCategory(e.target.value)}
           >
             {Array.isArray(categories) &&
               categories.map((category) => (
-                <option key={category._id} value={category._id}>
+                <option key={category._id} value={category.category_name}>
                   {category.category_name}
                 </option>
               ))}
