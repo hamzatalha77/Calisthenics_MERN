@@ -12,7 +12,7 @@ const listCategories =
       dispatch({ type: CATEGORY_LIST_REQUEST })
       const data = await axios.get('/api/categories')
       console.log(data)
-      dispatch({ type: CATEGORY_LIST_SUCCESS })
+      dispatch({ type: CATEGORY_LIST_SUCCESS, payload: data })
     } catch (error: any) {
       dispatch({
         type: CATEGORY_LIST_FAIL,
