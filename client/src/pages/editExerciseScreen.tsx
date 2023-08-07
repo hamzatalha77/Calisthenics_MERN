@@ -11,6 +11,8 @@ import {
   RootStateExerciseDetails,
   RootStateExerciseUpdate
 } from '../types/exerciseTypes'
+import { RootStateCategoryList } from '../types/categoryTypes'
+import { listCategories } from '../actions/categoryActions'
 
 const EditExercise = ({ match, history }: any) => {
   const { exerciseId } = useParams<{ exerciseId: string }>()
@@ -23,11 +25,17 @@ const EditExercise = ({ match, history }: any) => {
   const [reps, setReps] = useState<string>('')
   const [sets, setSets] = useState<string>('')
   const [duration, setDuration] = useState<string>('')
+  const [category, setCategory] = useState<string>('')
   const [images, setImages] = useState<string[]>([])
   const [imagesToUpload, setImagesToUpload] = useState<File[]>()
   const fileInputRef = useRef<HTMLInputElement>(null)
   const navigate = useNavigate()
   const dispatch = useDispatch<Dispatch<any>>()
+
+  const categoryList = useSelector(
+    (state: RootStateCategoryList) => state.categoryList
+  )
+  const { loading: loadingList, error: errorList, categories } = categoryList
 
   const exerciseDetails = useSelector(
     (state: RootStateExerciseDetails) => state.exerciseDetails
@@ -44,6 +52,7 @@ const EditExercise = ({ match, history }: any) => {
   } = exerciseUpdate
 
   useEffect(() => {
+    dispatch(listCategories())
     if (successUpdate) {
       dispatch({ type: EXERCISE_UPDATE_RESET })
       navigate('/table-exercise')
@@ -53,6 +62,7 @@ const EditExercise = ({ match, history }: any) => {
       } else {
         setTitle(exercise.title)
         setImages(exercise.images || [])
+        setCategory(exercise.category)
       }
     }
   }, [dispatch, exerciseId, successUpdate, exercise, history])
@@ -130,6 +140,24 @@ const EditExercise = ({ match, history }: any) => {
               </div>
             ))}
           </div>
+          <label
+            htmlFor="categories"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Select an option
+          </label>
+          <select
+            id="categories"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            {Array.isArray(categories) &&
+              categories.map((category) => (
+                <option key={category._id} value={category._id}>
+                  {category.category_name}
+                </option>
+              ))}
+          </select>
           <label
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             htmlFor="multiple_files"
