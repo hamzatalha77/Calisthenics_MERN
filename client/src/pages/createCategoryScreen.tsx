@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const submitHandler = () => {}
 const createCategoryScreen = () => {
+  const [category_name, setCategory_name] = useState<string>('')
+
+  const submitHandler = () => {}
   return (
     <form onSubmit={submitHandler}>
       <div className="relative mb-3" data-te-input-wrapper-init>
