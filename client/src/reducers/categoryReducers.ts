@@ -32,26 +32,21 @@ const categoryListReducers = (state = initialState, action: CategoryAction) => {
       return state
   }
 }
-const categoryCreateReducers = (
-  state = initialState,
-  action: CategoryAction
-) => {
+const categoryCreateReducers = (state = {}, action: CategoryAction) => {
   switch (action.type) {
     case CATEGORY_CREATE_REQUEST:
-      return { ...state, loading: true, categories: [], error: false }
+      return { loading: true, error: false }
     case CATEGORY_CREATE_SUCCESS:
       return {
-        ...state,
         loading: false,
         success: true,
-        categories: action.payload,
+        category: action.payload,
         error: false
       }
     case CATEGORY_CREATE_FAIL:
       return {
-        ...state,
         loading: false,
-        categories: [],
+
         error: true
       }
     default:
