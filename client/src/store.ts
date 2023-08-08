@@ -8,7 +8,10 @@ import {
 } from './reducers/exerciseReducers'
 import { combineReducers, applyMiddleware, createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { categoryListReducers } from './reducers/categoryReducers'
+import {
+  categoryCreateReducers,
+  categoryListReducers
+} from './reducers/categoryReducers'
 
 const reducer = combineReducers({
   exerciseCreate: exerciseCreateReducers,
@@ -16,7 +19,8 @@ const reducer = combineReducers({
   exerciseUpdate: exerciseUpdateReducers,
   exerciseDetails: exerciseDetailsReducers,
   exerciseDelete: exerciseDeleteReducers,
-  categoryList: categoryListReducers
+  categoryList: categoryListReducers,
+  categoryCreate: categoryCreateReducers
 })
 const initialState = {}
 
