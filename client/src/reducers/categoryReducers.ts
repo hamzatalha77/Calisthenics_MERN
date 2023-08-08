@@ -46,9 +46,10 @@ const categoryCreateReducers = (state = {}, action: CategoryAction) => {
     case CATEGORY_CREATE_FAIL:
       return {
         loading: false,
-
         error: true
       }
+    case CATEGORY_CREATE_RESET:
+      return {}
     default:
       return state
   }
