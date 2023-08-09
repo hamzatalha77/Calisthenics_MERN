@@ -13,7 +13,7 @@ import {
 } from '../types/categoryTypes'
 import { listCategories } from '../actions/categoryActions'
 
-const TableCategory = () => {
+const TableCategoryScreen = () => {
   const dispatch = useDispatch<Dispatch<any>>()
   const categoryList = useSelector(
     (state: RootStateCategoryList) => state.categoryList
@@ -107,4 +107,4 @@ const TableCategory = () => {
   )
 }
 
-export default TableCategory
+export default TableCategoryScreen
