@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { Dispatch } from 'redux'
 
 const CreateCategoryScreen = () => {
   const [category_name, setCategory_name] = useState<string>('')
   const [image_category, setImage_category] = useState<string>('')
+  const navigate = useNavigate()
+  const dispatch = useDispatch<Dispatch<any>>()
 
   const submitHandler = () => {}
   return (

@@ -28,5 +28,11 @@ export interface RootStateCategoryList {
     categories: Category[]
   }
 }
-
+export interface RootStateCategoryCreate {
+  categoryCreate: {
+    loading: boolean
+    success: boolean
+    error: boolean
+  }
+}
 export { initialState }
