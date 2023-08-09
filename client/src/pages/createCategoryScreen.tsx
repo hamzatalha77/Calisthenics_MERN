@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 
-const createCategoryScreen = () => {
+const CreateCategoryScreen = () => {
   const [category_name, setCategory_name] = useState<string>('')
+  const [image_category, setImage_category] = useState<string>('')
 
   const submitHandler = () => {}
   return (
@@ -53,4 +54,4 @@ const createCategoryScreen = () => {
   )
 }
 
-export default createCategoryScreen
+export default CreateCategoryScreen
