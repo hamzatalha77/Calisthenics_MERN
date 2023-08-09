@@ -35,4 +35,12 @@ export interface RootStateCategoryCreate {
     error: boolean
   }
 }
+export interface RootStateCategoryDelete {
+  categoryDelete: {
+    loading: boolean
+    success: boolean
+    error: boolean
+    categories: Category[]
+  }
+}
 export { initialState }
