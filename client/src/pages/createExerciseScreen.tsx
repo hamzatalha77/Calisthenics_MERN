@@ -124,7 +124,6 @@ const CreateExerciseScreen = () => {
               id="title"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Title..."
-              value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
@@ -140,7 +139,6 @@ const CreateExerciseScreen = () => {
               id="description"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Description..."
-              value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
           </div>
@@ -151,11 +149,7 @@ const CreateExerciseScreen = () => {
           >
             Select an option
           </label>
-          <select
-            id="categories"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
+          <select id="categories" onChange={(e) => setCategory(e.target.value)}>
             <option value="" disabled>
               Choose a category
             </option>
@@ -216,7 +210,6 @@ const CreateExerciseScreen = () => {
               id="video"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="video..."
-              value={video}
               onChange={(e) => setVideo(e.target.value)}
             />
           </div>
@@ -232,7 +225,6 @@ const CreateExerciseScreen = () => {
               id="tags"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Tags"
-              value={tags}
               onChange={(e) => setTags(e.target.value)}
             />
           </div>
@@ -248,7 +240,6 @@ const CreateExerciseScreen = () => {
               id="muscles"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="muscles"
-              value={muscles}
               onChange={(e) => setMuscles(e.target.value)}
             />
           </div>
@@ -264,7 +255,6 @@ const CreateExerciseScreen = () => {
               id="technique"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="technique"
-              value={technique}
               onChange={(e) => setTechnique(e.target.value)}
             />
           </div>
@@ -281,7 +271,6 @@ const CreateExerciseScreen = () => {
             id="reps"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="reps"
-            value={reps}
             onChange={(e) => setReps(e.target.value)}
           />
         </div>
@@ -297,7 +286,6 @@ const CreateExerciseScreen = () => {
             id="sets"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="sets"
-            value={sets}
             onChange={(e) => setSets(e.target.value)}
           />
         </div>
@@ -313,7 +301,6 @@ const CreateExerciseScreen = () => {
             id="duration"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="duration"
-            value={duration}
             onChange={(e) => setDuration(e.target.value)}
           />
         </div>
