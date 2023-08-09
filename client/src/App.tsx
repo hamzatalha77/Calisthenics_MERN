@@ -6,6 +6,7 @@ import CreateExercise from './pages/createExerciseScreen'
 import Navbar from './components/navbar'
 import TableExercise from './pages/tableExerciseScreen'
 import EditExercise from './pages/editExerciseScreen'
+import CreateCategoryScreen from './pages/createCategoryScreen'
 const App = () => {
   return (
     <div className="App">
@@ -15,6 +16,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/create-exercise" element={<CreateExercise />} />
+          <Route path="/create-category" element={<CreateCategoryScreen />} />
 
           <Route path="/table-exercise" element={<TableExercise />} />
           <Route path="/edit-exercise/:exerciseId" element={<EditExercise />} />
