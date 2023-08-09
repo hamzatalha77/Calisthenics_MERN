@@ -126,92 +126,6 @@ const EditExercise = ({ match, history }: any) => {
           onChange={(e) => setTitle(e.target.value)}
         />
         <div>
-          <button
-            id="dropdownRadioButton"
-            data-dropdown-toggle="dropdownDefaultRadio"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            type="button"
-          >
-            Dropdown radio
-            <svg
-              className="w-2.5 h-2.5 ml-2.5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 10 6"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="m1 1 4 4 4-4"
-              />
-            </svg>
-          </button>
-
-          <div
-            id="dropdownDefaultRadio"
-            className="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
-          >
-            <ul
-              className="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200"
-              aria-labelledby="dropdownRadioButton"
-            >
-              <li>
-                <div className="flex items-center">
-                  <input
-                    id="default-radio-1"
-                    type="radio"
-                    value=""
-                    name="default-radio"
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                  />
-                  <label
-                    htmlFor="default-radio-1"
-                    className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                  >
-                    Default radio
-                  </label>
-                </div>
-              </li>
-              <li>
-                <div className="flex items-center">
-                  <input
-                    checked
-                    id="default-radio-2"
-                    type="radio"
-                    value=""
-                    name="default-radio"
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                  />
-                  <label
-                    htmlFor="default-radio-2"
-                    className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                  >
-                    Checked state
-                  </label>
-                </div>
-              </li>
-              <li>
-                <div className="flex items-center">
-                  <input
-                    id="default-radio-3"
-                    type="radio"
-                    value=""
-                    name="default-radio"
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                  />
-                  <label
-                    htmlFor="default-radio-3"
-                    className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                  >
-                    Default radio
-                  </label>
-                </div>
-              </li>
-            </ul>
-          </div>
           <div className="theimage">
             {images.map((imagePath, index) => (
               <div key={index}>
@@ -234,13 +148,33 @@ const EditExercise = ({ match, history }: any) => {
               </div>
             ))}
           </div>
-          <label
-            htmlFor="categories"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Select an option
-          </label>
-          <select
+
+          <div className="border rounded-md p-4 w-full mx-auto max-w-2xl">
+            <h4 className="text-xl lg:text-2xl font-semibold">
+              Select Your Category
+            </h4>
+
+            <div>
+              {Array.isArray(categories) &&
+                categories.map((category) => (
+                  <label
+                    key={category._id}
+                    className="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 my-3 hover:bg-indigo-300 cursor-pointer"
+                  >
+                    <input
+                      type="radio"
+                      name="Category"
+                      value={category.category_name}
+                      checked={category._id === exercise.category}
+                      onChange={(e) => setCategory(category._id)}
+                    />
+                    <i className="pl-2">{category.category_name}</i>
+                  </label>
+                ))}
+            </div>
+          </div>
+
+          {/* <select
             id="categories"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
@@ -251,7 +185,7 @@ const EditExercise = ({ match, history }: any) => {
                   {category.category_name}
                 </option>
               ))}
-          </select>
+          </select> */}
 
           <label
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
