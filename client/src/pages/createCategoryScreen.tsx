@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Dispatch } from 'redux'
 import { RootStateCategoryCreate } from '../types/categoryTypes'
+import { CATEGORY_CREATE_RESET } from '../constants/CategoryConstants'
 
 const CreateCategoryScreen = () => {
   const [category_name, setCategory_name] = useState<string>('')
@@ -14,7 +15,12 @@ const CreateCategoryScreen = () => {
     (state: RootStateCategoryCreate) => state.categoryCreate
   )
   const { success: successCreate, error: errorCreate } = categoryCreate
-
+  useEffect(() => {
+    if (successCreate) {
+      dispatch({ type: CATEGORY_CREATE_RESET })
+      navigate('/')
+    }
+  }, [dispatch, successCreate, errorCreate, navigate])
   const submitHandler = () => {}
   return (
     <form onSubmit={submitHandler}>
