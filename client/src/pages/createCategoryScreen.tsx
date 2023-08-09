@@ -1,13 +1,19 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Dispatch } from 'redux'
+import { RootStateCategoryCreate } from '../types/categoryTypes'
 
 const CreateCategoryScreen = () => {
   const [category_name, setCategory_name] = useState<string>('')
   const [image_category, setImage_category] = useState<string>('')
   const navigate = useNavigate()
   const dispatch = useDispatch<Dispatch<any>>()
+
+  const categoryCreate = useSelector(
+    (state: RootStateCategoryCreate) => state.categoryCreate
+  )
+  const { success: successCreate, error: errorCreate } = categoryCreate
 
   const submitHandler = () => {}
   return (
