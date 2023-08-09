@@ -150,9 +150,7 @@ const CreateExerciseScreen = () => {
             Select an option
           </label>
           <select id="categories" onChange={(e) => setCategory(e.target.value)}>
-            <option value="" disabled>
-              Choose a category
-            </option>
+            <option disabled>Choose a category</option>
             {Array.isArray(categories) &&
               categories.map((category) => (
                 <option key={category._id} value={category._id}>
