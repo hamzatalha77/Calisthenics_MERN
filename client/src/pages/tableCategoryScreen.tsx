@@ -81,7 +81,11 @@ const TableCategoryScreen = () => {
                 </th>
                 <td className="px-6 py-4">Silver</td>
                 <td className="px-6 py-4">Laptop</td>
-                <td className="px-6 py-4">$2999</td>
+                <td className="px-6 py-4">
+                  <Link to={`/add-subcategory/${category._id}/subcategories`}>
+                    Add Subcategory
+                  </Link>
+                </td>
                 {/* <td className="px-6 py-4">
                   <Link
                     to={`/edit-category/${category._id}`}

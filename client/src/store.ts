@@ -12,6 +12,7 @@ import {
   categoryCreateReducers,
   categoryListReducers
 } from './reducers/categoryReducers'
+import { subcategoryCreateReducers } from './reducers/subcategoryReducers'
 
 const reducer = combineReducers({
   exerciseCreate: exerciseCreateReducers,
@@ -20,7 +21,8 @@ const reducer = combineReducers({
   exerciseDetails: exerciseDetailsReducers,
   exerciseDelete: exerciseDeleteReducers,
   categoryList: categoryListReducers,
-  categoryCreate: categoryCreateReducers
+  categoryCreate: categoryCreateReducers,
+  subcategoryCreate: subcategoryCreateReducers
 })
 const initialState = {}
 

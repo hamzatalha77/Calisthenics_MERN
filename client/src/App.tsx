@@ -8,6 +8,7 @@ import TableExercise from './pages/tableExerciseScreen'
 import EditExercise from './pages/editExerciseScreen'
 import CreateCategoryScreen from './pages/createCategoryScreen'
 import TableCategoryScreen from './pages/tableCategoryScreen'
+import CreateSubcategoryScreen from './pages/createSubcategoryScreen'
 const App = () => {
   return (
     <div className="App">
@@ -19,6 +20,10 @@ const App = () => {
           <Route path="/create-exercise" element={<CreateExercise />} />
           <Route path="/create-category" element={<CreateCategoryScreen />} />
           <Route path="/table-category" element={<TableCategoryScreen />} />
+          <Route
+            path="/add-subcategory/:categoryId/subcategories"
+            element={<CreateSubcategoryScreen />}
+          />
 
           <Route path="/table-exercise" element={<TableExercise />} />
           <Route path="/edit-exercise/:exerciseId" element={<EditExercise />} />
