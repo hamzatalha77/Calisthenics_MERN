@@ -21,7 +21,7 @@ const App = () => {
           <Route path="/create-category" element={<CreateCategoryScreen />} />
           <Route path="/table-category" element={<TableCategoryScreen />} />
           <Route
-            path="/add-subcategory/:categoryId/subcategories"
+            path="/add-subcategory/:category_id/subcategories"
             element={<CreateSubcategoryScreen />}
           />
 

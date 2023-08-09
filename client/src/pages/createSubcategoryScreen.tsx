@@ -5,7 +5,8 @@ import { Dispatch } from 'redux'
 import { createSubcategory } from '../actions/subcategoryActions'
 
 const CreateSubcategoryScreen = () => {
-  const { category_id } = useParams()
+  const { category_id } = useParams() // Ensure that useParams() is working as expected
+
   const navigate = useNavigate()
   const dispatch = useDispatch<Dispatch<any>>()
 
