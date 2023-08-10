@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Home from './pages/authentication/home'
-import Auth from './pages/authentication/auth'
+import Home from './pages/Authentication/home'
+import Auth from './pages/Authentication/auth'
 import CreateExercise from './pages/Exercises/createExerciseScreen'
 // import SavedExercise from './pages/savedExercise'
 import Navbar from './components/navbar'
