@@ -2,7 +2,7 @@ import React, { ChangeEvent, FormEvent, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Dispatch } from 'redux'
-import { createSubcategory } from '../actions/subcategoryActions'
+import { createSubcategory } from '../../actions/subcategoryActions'
 
 const CreateSubcategoryScreen = () => {
   const { category_id } = useParams() // Ensure that useParams() is working as expected

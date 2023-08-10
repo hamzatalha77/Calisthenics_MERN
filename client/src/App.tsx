@@ -1,14 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Home from './pages/home'
-import Auth from './pages/auth'
-import CreateExercise from './pages/createExerciseScreen'
+import Home from './pages/authentication/home'
+import Auth from './pages/authentication/auth'
+import CreateExercise from './pages/Exercises/createExerciseScreen'
 // import SavedExercise from './pages/savedExercise'
 import Navbar from './components/navbar'
-import TableExercise from './pages/tableExerciseScreen'
-import EditExercise from './pages/editExerciseScreen'
-import CreateCategoryScreen from './pages/createCategoryScreen'
-import TableCategoryScreen from './pages/tableCategoryScreen'
-import CreateSubcategoryScreen from './pages/createSubcategoryScreen'
+import TableExercise from './pages/Exercises/tableExerciseScreen'
+import EditExercise from './pages/Exercises/editExerciseScreen'
+import CreateCategoryScreen from './pages/Categories/createCategoryScreen'
+import TableCategoryScreen from './pages/Categories/tableCategoryScreen'
+import CreateSubcategoryScreen from './pages/Categories/createSubcategoryScreen'
 const App = () => {
   return (
     <div className="App">

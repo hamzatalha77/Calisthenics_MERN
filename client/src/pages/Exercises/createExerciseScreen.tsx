@@ -2,11 +2,11 @@ import { useEffect, useState, ChangeEvent, FormEvent, useRef } from 'react'
 import { Dispatch } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
-import { EXERCISE_CREATE_RESET } from '../constants/ExerciseConstants'
-import { createExercise } from '../actions/exerciseActions'
-import { RootStateExerciseCreate } from '../types/exerciseTypes'
-import { RootStateCategoryList } from '../types/categoryTypes'
-import { listCategories } from '../actions/categoryActions'
+import { RootStateCategoryList } from '../../types/categoryTypes'
+import { RootStateExerciseCreate } from '../../types/exerciseTypes'
+import { listCategories } from '../../actions/categoryActions'
+import { EXERCISE_CREATE_RESET } from '../../constants/ExerciseConstants'
+import { createExercise } from '../../actions/exerciseActions'
 
 const CreateExerciseScreen = () => {
   const [title, setTitle] = useState<string>('')

@@ -2,9 +2,9 @@ import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Dispatch } from 'redux'
-import { RootStateCategoryCreate } from '../types/categoryTypes'
-import { CATEGORY_CREATE_RESET } from '../constants/CategoryConstants'
-import { createCategory } from '../actions/categoryActions'
+import { RootStateCategoryCreate } from '../../types/categoryTypes'
+import { CATEGORY_CREATE_RESET } from '../../constants/CategoryConstants'
+import { createCategory } from '../../actions/categoryActions'
 
 const CreateCategoryScreen = () => {
   const [category_name, setCategory_name] = useState<string>('')

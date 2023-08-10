@@ -2,17 +2,17 @@ import { useEffect, useState, ChangeEvent, FormEvent, useRef } from 'react'
 import { Dispatch } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import { EXERCISE_UPDATE_RESET } from '../constants/ExerciseConstants'
-import {
-  updateExercise,
-  listExercisesDetails
-} from '../actions/exerciseActions'
+import { RootStateCategoryList } from '../../types/categoryTypes'
 import {
   RootStateExerciseDetails,
   RootStateExerciseUpdate
-} from '../types/exerciseTypes'
-import { RootStateCategoryList } from '../types/categoryTypes'
-import { listCategories } from '../actions/categoryActions'
+} from '../../types/exerciseTypes'
+import { listCategories } from '../../actions/categoryActions'
+import { EXERCISE_UPDATE_RESET } from '../../constants/ExerciseConstants'
+import {
+  listExercisesDetails,
+  updateExercise
+} from '../../actions/exerciseActions'
 
 const EditExercise = ({ match, history }: any) => {
   const { exerciseId } = useParams<{ exerciseId: string }>()
