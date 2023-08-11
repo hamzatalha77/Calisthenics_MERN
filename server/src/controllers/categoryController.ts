@@ -12,17 +12,17 @@ const getCategories = asyncHandler(async (req: Request, res: Response) => {
     res.json(error)
   }
 })
-const getCategoriesWithSubcategories = asyncHandler(
-  async (req: Request, res: Response) => {
-    try {
-      const categories = await CategoryModel.find({}).populate('subcategories')
+// const getCategoriesWithSubcategories = asyncHandler(
+//   async (req: Request, res: Response) => {
+//     try {
+//       const categories = await CategoryModel.find({}).populate('subcategories')
 
-      res.json(categories)
-    } catch (error) {
-      res.status(500).json({ error: 'Internal server error' })
-    }
-  }
-)
+//       res.json(categories)
+//     } catch (error) {
+//       res.status(500).json({ error: 'Internal server error' })
+//     }
+//   }
+// )
 const getCategory = asyncHandler(async (req: Request, res: Response) => {
   const category = await CategoryModel.findById(req.params.id)
   if (category) {
@@ -100,6 +100,5 @@ export {
   createCategory,
   updateCategory,
   deleteCategory,
-  getCategoriesWithSubcategories,
   getCategory
 }
