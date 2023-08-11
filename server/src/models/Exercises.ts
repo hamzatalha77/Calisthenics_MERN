@@ -48,12 +48,12 @@ const exerciseSchema = new mongoose.Schema(
       type: String,
       lowercase: true
     },
-    category: {
+    categories: {
       type: mongoose.Schema.ObjectId,
       ref: 'categories',
       required: [true, 'Exercise must be belong to category']
     },
-    subcategory: [
+    subcategories: [
       {
         type: mongoose.Schema.ObjectId,
         ref: 'subcategories'

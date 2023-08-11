@@ -8,7 +8,7 @@ const allExercise = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
     try {
       const response = await ExerciseModel.find(req.query).populate({
-        path: 'category',
+        path: 'categories',
         select: 'category_name -_id'
       })
       res.json(response)
@@ -19,7 +19,7 @@ const allExercise = asyncHandler(
 )
 const getExerciseById = asyncHandler(async (req, res) => {
   const exercise = await ExerciseModel.findById(req.params.id).populate({
-    path: 'category',
+    path: 'categories',
     select: 'category_name -_id'
   })
   if (exercise) {

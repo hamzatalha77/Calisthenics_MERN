@@ -163,9 +163,8 @@ const EditExercise = ({ match, history }: any) => {
                   >
                     <input
                       type="radio"
-                      name="Category"
                       value={category.category_name}
-                      checked={category._id === exercise.category}
+                      checked={exercise.category._id === category._id}
                       onChange={(e) => setCategory(category._id)}
                     />
                     <i className="pl-2">{category.category_name}</i>
