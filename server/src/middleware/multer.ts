@@ -46,7 +46,7 @@ const multipleUpload = multer({
   ) {
     checkFileType(file, cb)
   }
-}).array('images[]', 5)
+}).array('images', 5)
 
 const singleUpload = multer({
   storage,
