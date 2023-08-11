@@ -157,13 +157,17 @@ const EditExercise = ({ match, history }: any) => {
             <div>
               {exercise && (
                 <select
-                  name="Category"
+                  name={category}
                   onChange={(e) => setCategory(e.target.value)}
                 >
                   {categories.map((category) => (
                     <option
+                      key={category._id}
                       value={category._id}
-                      selected={exercise.category._id === category._id}
+                      selected={
+                        exercise.category &&
+                        exercise.category._id === category._id
+                      }
                     >
                       {category.category_name}
                     </option>
