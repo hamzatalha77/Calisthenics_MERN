@@ -7,7 +7,10 @@ export interface Exercise {
   _id: string
   title: string
   images?: string[]
-  category: string
+  category: {
+    _id: string
+    category_name: string
+  }
 }
 
 export interface ExerciseListState {

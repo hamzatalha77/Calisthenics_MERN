@@ -48,7 +48,7 @@ const exerciseSchema = new mongoose.Schema(
       type: String,
       lowercase: true
     },
-    categories: {
+    category: {
       type: mongoose.Schema.ObjectId,
       ref: 'categories',
       required: [true, 'Exercise must be belong to category']

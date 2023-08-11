@@ -66,11 +66,9 @@ const EditExercise = ({ match, history }: any) => {
         console.log('Setting exercise details...')
         setTitle(exercise.title)
         setImages(exercise.images || [])
-        setCategory(exercise.category)
+        setCategory(exercise.category._id)
         console.log('Category set to:', exercise.category)
       }
-
-      setCategory('')
     }
   }, [dispatch, exerciseId, successUpdate, exercise, history])
 
@@ -105,6 +103,8 @@ const EditExercise = ({ match, history }: any) => {
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    console.log(category)
+    console.log(category)
     dispatch(
       updateExercise({
         _id: exerciseId,
@@ -155,7 +155,23 @@ const EditExercise = ({ match, history }: any) => {
             </h4>
 
             <div>
-              {Array.isArray(categories) &&
+              {exercise && (
+                <select
+                  name="Category"
+                  onChange={(e) => setCategory(e.target.value)}
+                >
+                  {categories.map((category) => (
+                    <option
+                      value={category._id}
+                      selected={exercise.category._id === category._id}
+                    >
+                      {category.category_name}
+                    </option>
+                  ))}
+                </select>
+              )}
+              {/* {Array.isArray(categories) &&
+                exercise.images &&
                 categories.map((category) => (
                   <label
                     key={category._id}
@@ -163,13 +179,17 @@ const EditExercise = ({ match, history }: any) => {
                   >
                     <input
                       type="radio"
+                      name="Category"
                       value={category.category_name}
-                      checked={exercise.category._id === category._id}
+                      checked={
+                        exercise.category.category_name ===
+                        category.category_name
+                      }
                       onChange={(e) => setCategory(category._id)}
                     />
                     <i className="pl-2">{category.category_name}</i>
                   </label>
-                ))}
+                ))} */}
             </div>
           </div>
 
